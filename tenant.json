@@ -1,0 +1,26 @@
+{
+   "title":"Carat",
+   "logoURL":"logo.png",
+   "description":"",
+   "tags":"commerce",
+   "solutions":[
+      {
+         "id":"123",
+         "name":"",
+         "logoURL":"string",
+         "description":"",
+         "tags":"",
+         "products":[
+            {
+               "id":"",
+               "name":"",
+               "logoURL":"string",
+               "description":"",
+               "apiSpecification":"http://localhost:8081/v1/swagger",
+               "format":"json",
+               "string":""
+            }
+         ]
+      }
+   ]
+}
