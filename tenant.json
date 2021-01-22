@@ -1,120 +1,47 @@
 {
-   "title":"Banking",
-   "logoURL":"https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-   "description":"Open banking is an important strategy for financial institutions to compete and grow. Banks can collaborate with Fintechs to deliver services as features within innovative distribution channels, create unique value propositions and differentiate through personalized digital experiences.Open banking enables financial institutions to use the wealth of data at their disposal to be truly innovative – launching new partnerships, new ways of engaging customers and new revenue opportunities.",
-   "tags":[
-       "banking",
-      "commerce",
-      "payments"
-   ],
-   "solutions":[
-      {
-         "id":"123",
-         "name":"Payments",
-         "logoURL":"string",
-         "description":"The Payments API specification describes a collection of RESTful APIs that enable TPPs to access information and initiate payments for customers, by connecting to ASPSPs – securely, efficiently, and with customer consent. This is the specification that describing a collection of RESTful APIs that enable TPPs to access information and initiate payments for customers, by connecting to ASPSPs – securely, efficiently, and with customer consent.",
-         "tags":null,
-         "products":[
-            {
-               "id":"1",
-               "name":"Product 1",
-               "logoURL":"https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-               "description":"Authoritatively disseminate prospective leadership via opportunities economically sound.",
-               "apiSpecification":"http://tenant-petstore2-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud:80/v1/tenants/petstore/swagger",
-               "format":"yaml",
-               "documentation":"http://tenant-petstore2-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud:80/v1/tenants/petstore/docs"
-            },
-            {
-               "id":"2",
-               "name":"Product 2",
-               "logoURL":"https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-               "description":"Authoritatively disseminate prospective leadership via opportunities economically sound.",
-               "apiSpecification":"/v1/tenants/openbanking/swagger",
-               "format":"yaml",
-               "documentation":"/v1/tenants/openbanking/docs"
-            },
-            {
-               "id":"3",
-               "name":"Product 3",
-               "logoURL":"https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-               "description":"Authoritatively disseminate prospective leadership via opportunities economically sound.",
-               "apiSpecification":"/v1/tenants/openbanking/swagger",
-               "format":"yaml",
-               "documentation":"/v1/tenants/openbanking/docs"
-            }
-         ]
-      },
-      {
-         "id":"456",
-         "name":"Open Data",
-         "logoURL":"string",
-         "description":"This specification includes all relevant artefacts for the Open Data Branch API Specification. This allowing API providers (e.g. banks, building societies and ATM providers) to develop API endpoints which can then be accessed by API users (e.g. third party developers) to build mobile and web applications for banking customers.",
-         "tags":null,
-         "products":[
-            {
-               "id":"1",
-               "name":"Product 1",
-               "logoURL":"",
-               "description":"Authoritatively disseminate prospective leadership via opportunities economically sound.",
-               "apiSpecification":"",
-               "format":"",
-               "documentation":""
-            },
-            {
-               "id":"2",
-               "name":"Product 2",
-               "logoURL":"",
-               "description":"Authoritatively disseminate prospective leadership via opportunities economically sound.",
-               "apiSpecification":"",
-               "format":"",
-               "documentation":""
-            },
-            {
-               "id":"3",
-               "name":"Product 3",
-               "logoURL":"",
-               "description":"Authoritatively disseminate prospective leadership via opportunities economically sound.",
-               "apiSpecification":"",
-               "format":"",
-               "documentation":""
-            }
-         ]
-      },
-      {
-         "id":"789",
-         "name":"Dynamic Client Registration",
-         "logoURL":"string",
-         "description":"The Dynamic Client Registration APIs allow this to be carried out in a manner that offers very low friction and removes hurdles and barriers to entry for the TPP to interact with the ASPSP.This specification is designed to offer a high degree of flexibility of implementation. It defines the APIs for TPPs to submit Software Statement Assertions to ASPSPs for the purpose of creating OAuth clients that are registered with ASPSPs",
-         "tags":null,
-         "products":[
-            {
-               "id":"1",
-               "name":"Product 1",
-               "logoURL":"",
-               "description":"Authoritatively disseminate prospective leadership via opportunities economically sound.",
-               "apiSpecification":"",
-               "format":"",
-               "documentation":""
-            },
-            {
-               "id":"2",
-               "name":"Product 2",
-               "logoURL":"",
-               "description":"Authoritatively disseminate prospective leadership via opportunities economically sound.",
-               "apiSpecification":"",
-               "format":"",
-               "documentation":""
-            },
-            {
-               "id":"3",
-               "name":"Product 3",
-               "logoURL":"",
-               "description":"Authoritatively disseminate prospective leadership via opportunities economically sound.",
-               "apiSpecification":"",
-               "format":"",
-               "documentation":""
-            }
-         ]
-      }
-   ]
+  "title": "Banking",
+  "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+  "description": "Open banking is an important strategy for financial institutions to compete and grow. Banks can collaborate with Fintechs to deliver services as features within innovative distribution channels, create unique value propositions and differentiate through personalized digital experiences.Open banking enables financial institutions to use the wealth of data at their disposal to be truly innovative – launching new partnerships, new ways of engaging customers and new revenue opportunities.",
+  "tags": [
+    "banking",
+    "commerce",
+    "payments"
+  ],
+  "solutions": [
+    {
+      "id": "123",
+      "name": "Open Banking",
+      "logoURL": "",
+      "description": "The Payments API specification describes a collection of RESTful APIs that enable TPPs to access information and initiate payments for customers, by connecting to ASPSPs – securely, efficiently, and with customer consent. This is the specification that describing a collection of RESTful APIs that enable TPPs to access information and initiate payments for customers, by connecting to ASPSPs – securely, efficiently, and with customer consent.",
+      "tags": null,
+      "products": [
+        {
+          "id": "1",
+          "name": "Product 1",
+          "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+          "description": "Authoritatively disseminate prospective leadership via opportunities economically sound.",
+          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
+          "format": "yaml",
+          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
+        },
+        {
+          "id": "2",
+          "name": "Product 2",
+          "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+          "description": "Authoritatively disseminate prospective leadership via opportunities economically sound.",
+          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
+          "format": "yaml",
+          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
+        },
+        {
+          "id": "3",
+          "name": "Product 3",
+          "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
+          "format": "yaml",
+          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
+        }
+      ]
+    }
+  ]
 }
