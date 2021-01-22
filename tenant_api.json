@@ -42,6 +42,72 @@
           "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
         }
       ]
-    }
-  ]
+    },
+      {
+         "id":"451",
+         "name":"Open Data",
+         "logoURL":"string",
+         "description":"This specification includes all relevant artefacts for the Open Data Branch API Specification. This allowing API providers (e.g. banks, building societies and ATM providers) to develop API endpoints which can then be accessed by API users (e.g. third party developers) to build mobile and web applications for banking customers.",
+         "tags":null,
+         "products":[
+            {
+               "id":"8",
+               "name":"Product 1",
+               "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
+          "format": "yaml",
+          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
+            },
+            {
+               "id":"9",
+               "name":"Product 2",
+               "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
+          "format": "yaml",
+          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
+            },
+            {
+               "id":"10",
+               "name":"Product 3",
+             "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
+          "format": "yaml",
+          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
+            }
+         ]
+      },
+      {
+         "id":"452",
+         "name":"Dynamic Client Registration",
+         "logoURL":"string",
+         "description":"The Dynamic Client Registration APIs allow this to be carried out in a manner that offers very low friction and removes hurdles and barriers to entry for the TPP to interact with the ASPSP.This specification is designed to offer a high degree of flexibility of implementation. It defines the APIs for TPPs to submit Software Statement Assertions to ASPSPs for the purpose of creating OAuth clients that are registered with ASPSPs",
+         "tags":null,
+         "products":[
+            {
+               "id":"11",
+               "name":"Product 1",
+               "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
+          "format": "yaml",
+          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
+            },
+            {
+               "id":"12",
+               "name":"Product 2",
+               "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
+          "format": "yaml",
+          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
+            },
+            {
+               "id":"13",
+               "name":"Product 3",
+              "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
+          "format": "yaml",
+          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
+           }
+         ]
+      }
+   ]
 }
