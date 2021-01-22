@@ -1,0 +1,46 @@
+title: Banking
+logoURL: https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142
+description: Open banking is an important strategy for financial institutions to compete
+  and grow. Banks can collaborate with Fintechs to deliver services as features within
+  innovative distribution channels, create unique value propositions and differentiate
+  through personalized digital experiences.Open banking enables financial institutions
+  to use the wealth of data at their disposal to be truly innovative – launching new
+  partnerships, new ways of engaging customers and new revenue opportunities.
+tags:
+- banking
+- commerce
+- payments
+solutions:
+- id: '123'
+  name: Open Banking
+  logoURL: ''
+  description: The Payments API specification describes a collection of RESTful APIs
+    that enable TPPs to access information and initiate payments for customers, by
+    connecting to ASPSPs – securely, efficiently, and with customer consent. This
+    is the specification that describing a collection of RESTful APIs that enable
+    TPPs to access information and initiate payments for customers, by connecting
+    to ASPSPs – securely, efficiently, and with customer consent.
+  tags:
+  products:
+  - id: '1'
+    name: Product 1
+    logoURL: https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142
+    description: Authoritatively disseminate prospective leadership via opportunities
+      economically sound.
+    apiSpecification: http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger
+    format: yaml
+    documentation: http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs
+  - id: '2'
+    name: Product 2
+    logoURL: https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142
+    description: Authoritatively disseminate prospective leadership via opportunities
+      economically sound.
+    apiSpecification: http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger
+    format: yaml
+    documentation: http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs
+  - id: '3'
+    name: Product 3
+    logoURL: https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142
+    apiSpecification: http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger
+    format: yaml
+    documentation: http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs
