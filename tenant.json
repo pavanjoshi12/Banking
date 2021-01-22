@@ -1,5 +1,5 @@
 {
-   "title":"Payments",
+   "title":"Banking",
    "logoURL":"https://merchants.fiserv.com/content/dam/firstdata/us/en/static/carat/images/carat-logo.svg",
    "description":"Our powerful omnichannel commerce solutions help companies reach untapped markets and expand globally without being limited by borders, currencies or old ways of thinking.\n      Carat's single-source commerce engine makes the process seamless, effortless, and secure. We've unified our suite of solutions into a powerful tech ecosystem so you can create commerce.\n      Carat's single-source commerce engine makes the process seamless, effortless, and secure. We've unified our suite of solutions into a powerful tech ecosystem so you can create commerce. Carat's single-source commerce engine makes the process seamless, effortless, and secure. We've unified our suite of solutions into a powerful tech ecosystem so you can create commerce.",
    "tags":[
@@ -9,9 +9,9 @@
    "solutions":[
       {
          "id":"123",
-         "name":"Omnichannel Solutions",
+         "name":"Payments",
          "logoURL":"string",
-         "description":"Create payment experiences that help drive more commerce. Additional information about this Category of Products",
+         "description":"The Payments API specification describes a collection of RESTful APIs that enable TPPs to access information and initiate payments for customers, by connecting to ASPSPs – securely, efficiently, and with customer consent.",
          "tags":null,
          "products":[
             {
@@ -45,7 +45,7 @@
       },
       {
          "id":"456",
-         "name":"ECommerce Solutions",
+         "name":"Open Data API Specifications",
          "logoURL":"string",
          "description":"Secure commerce and optimize payment and payout strategies Additional information about this Category of Products. TKTKTKTKTKTKTKTKTKTK",
          "tags":null,
@@ -81,7 +81,7 @@
       },
       {
          "id":"789",
-         "name":"Payouts",
+         "name":"Dynamic Client Registration",
          "logoURL":"string",
          "description":"Innovate and streamline gift and payroll card programs. Additional information about this Category of Products. TKTKTKTKTKTKTKTKTKTK",
          "tags":null,
