@@ -78,7 +78,7 @@
       },
       {
          "id":"452",
-         "name":"Dynamic Client Registration",
+         "name":"Client Registration",
          "logoURL":"string",
          "description":"The Dynamic Client Registration APIs allow this to be carried out in a manner that offers very low friction and removes hurdles and barriers to entry for the TPP to interact with the ASPSP.This specification is designed to offer a high degree of flexibility of implementation.",
          "tags":null,
