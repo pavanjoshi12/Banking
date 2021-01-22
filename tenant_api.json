@@ -80,7 +80,7 @@
          "id":"452",
          "name":"Dynamic Client Registration",
          "logoURL":"string",
-         "description":"The Dynamic Client Registration APIs allow this to be carried out in a manner that offers very low friction and removes hurdles and barriers to entry for the TPP to interact with the ASPSP.This specification is designed to offer a high degree of flexibility of implementation. It defines the APIs for TPPs to submit Software Statement Assertions to ASPSPs for the purpose of creating OAuth clients that are registered with ASPSPs",
+         "description":"The Dynamic Client Registration APIs allow this to be carried out in a manner that offers very low friction and removes hurdles and barriers to entry for the TPP to interact with the ASPSP.This specification is designed to offer a high degree of flexibility of implementation.",
          "tags":null,
          "products":[
             {
