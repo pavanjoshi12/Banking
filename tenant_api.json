@@ -13,19 +13,19 @@
       "subcategories": []
     },
     {
-      "categoryId": 501,
+      "categoryId": 502,
       "name": "openBanking",
       "value": "Open Banking",
       "subcategories": []
     },
     {
-      "categoryId": 501,
+      "categoryId": 503,
       "name": "AccountServices",
       "value": "Account services",
       "subcategories": []
     },
     {
-      "categoryId": 501,
+      "categoryId": 504,
       "name": "DebitServices",
       "value": "Debit services",
       "subcategories": []
