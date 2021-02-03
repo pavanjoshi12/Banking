@@ -4,8 +4,8 @@ productPage:
     - descrption: Hero description
   - journey Cards:
       - journeyCard:
-        - title: Learn # => learn | Learning With Pavan => learning-with-pavan
-        - description: Learn to user CommerceHub
+        - title: Learn
+        - description: Learn to user Open Banking
         - link: 
           - type: markdown
           - uri: /docs/learn.md
@@ -27,10 +27,10 @@ productPage:
             - description: Watch
             - link: 
               - type: externalLink # [externalLink | internalLink | markdown]
-              - uri: http://youtube.com/commercehub
+              - uri: http://youtube.com/openBanking
       - journeyCard:
         - title: Build
-        - description: Build with CommerceHub
+        - description: Build with OpenBanking
         - link: 
           - type: markdown
           - uri: /docs/build.md
