@@ -5,7 +5,7 @@ productPage:
   - journey Cards:
       - journeyCard:
         - title: Learn
-        - description: Learn to user Open Banking
+        - description: Learn to use Open Banking
         - link: 
           - type: markdown
           - uri: /docs/learn.md
