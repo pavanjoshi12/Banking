@@ -2,7 +2,7 @@
 
 ## Welcome to Open Banking!
 
-To help get you started, we’ve put together a few resources to help you learn about how to integrate with Commerce Hub.
+To help get you started, we’ve put together a few resources to help you learn about how to integrate with Open Banking.
 
 ## Intro to our resources
 Commerce Hub offers some of the best-written documentation in the payments space as well as an online knowledge base and technical support from Commerce Hub experts.
