@@ -4,110 +4,29 @@
   "description": "Open banking is an important strategy for financial institutions to compete and grow. Banks can collaborate with Fintechs to deliver services as features within innovative distribution channels, create unique value propositions and differentiate through personalized digital experiences.Open banking enables financial institutions to use the wealth of data at their disposal to be truly innovative – launching new partnerships, new ways of engaging customers and new revenue opportunities.",
   "tags": [
     "banking",
-    "commerce",
-    "payments"
+    "openBanking"
   ],
-  "solutions": [
+  "solution": "Banking",
+  "products": [
     {
-      "id": "450",
-      "name": "Open Banking",
-      "logoURL": "",
-      "description": "The Payments API specification describes a collection of RESTful APIs that enable TPPs to access information and initiate payments for customers, by connecting to ASPSPs – securely, efficiently, and with customer consent. This is the specification that describing a collection of RESTful APIs that enable TPPs to access information and initiate payments for customers, by connecting to ASPSPs – securely, efficiently, and with customer consent.",
-      "tags": null,
-      "products": [
-        {
-          "id": "5",
-          "name": "Product 1",
-          "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-          "description": "Authoritatively disseminate prospective leadership via opportunities economically sound.",
-          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
-          "format": "yaml",
-          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
-        },
-        {
-          "id": "6",
-          "name": "Product 2",
-          "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-          "description": "Authoritatively disseminate prospective leadership via opportunities economically sound.",
-          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
-          "format": "yaml",
-          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
-        },
-        {
-          "id": "7",
-          "name": "Product 3",
-          "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
-          "format": "yaml",
-          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
-        }
-      ]
+      "id": "5",
+      "name": "Account Services",
+      "featured": true,
+      "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+      "description": "This Fiserv solution will help financial institutions offer their own open banking portal – enabling them to offer Banking as a Service, co-innovate with Fintechs, deliver financial services through exciting new channels and accelerate time to market.",
+      "apiSpecification": "/v1/tenants/openbanking/swagger",
+      "documentation": "/v1/tenants/openbanking/docs",
+      "layout": "/v1/products/openbanking/layouts/productPage"
     },
-      {
-         "id":"451",
-         "name":"Open Data",
-         "logoURL":"string",
-         "description":"This specification includes all relevant artefacts for the Open Data Branch API Specification. This allowing API providers (e.g. banks, building societies and ATM providers) to develop API endpoints which can then be accessed by API users (e.g. third party developers) to build mobile and web applications for banking customers.",
-         "tags":null,
-         "products":[
-            {
-               "id":"8",
-               "name":"Product 1",
-               "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
-          "format": "yaml",
-          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
-            },
-            {
-               "id":"9",
-               "name":"Product 2",
-               "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
-          "format": "yaml",
-          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
-            },
-            {
-               "id":"10",
-               "name":"Product 3",
-             "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
-          "format": "yaml",
-          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
-            }
-         ]
-      },
-      {
-         "id":"452",
-         "name":"Client Registration",
-         "logoURL":"string",
-         "description":"The Dynamic Client Registration APIs allow this to be carried out in a manner that offers very low friction and removes hurdles and barriers to entry for the TPP to interact with the ASPSP.This specification is designed to offer a high degree of flexibility of implementation.",
-         "tags":null,
-         "products":[
-            {
-               "id":"11",
-               "name":"Product 1",
-               "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
-          "format": "yaml",
-          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
-            },
-            {
-               "id":"12",
-               "name":"Product 2",
-               "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
-          "format": "yaml",
-          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
-            },
-            {
-               "id":"13",
-               "name":"Product 3",
-              "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
-          "apiSpecification": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/swagger",
-          "format": "yaml",
-          "documentation": "http://tenant-openbanking-dev-developer-portal.roks-eck-cluster-8a571839bba611238ae425f409ae5396-0000.us-south.containers.appdomain.cloud/v1/tenants/openbanking/docs"
-           }
-         ]
-      }
-   ]
+    {
+      "id": "6",
+      "name": "Debit Services",
+      "featured": false,
+      "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+      "description": "This Fiserv solution will help financial institutions offer their own open banking portal – enabling them to offer Banking as a Service, co-innovate with Fintechs, deliver financial services through exciting new channels and accelerate time to market.",
+      "apiSpecification": "/v1/tenants/openbanking/swagger",
+      "documentation": "/v1/tenants/openbanking/docs",
+      "layout": "/v1/products/openbanking/layouts/productPage"
+    }
+  ]
 }
