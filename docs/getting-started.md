@@ -13,7 +13,7 @@ Here are some resources that we recommend taking a look at!
 
 * Open Banking Docs: [https://dev.fiserv.com/openBanking/docs](https://dev.fiserv.com/openBanking/docs)
 * API Docs: https://dev.fiserv.com/openBanking/docs/api
-* Commerce Hub.js Reference: https://dev.fiserv.com/openBanking/docs/js
+* Open Banking.js Reference: https://dev.fiserv.com/openBanking/docs/js
 * FAQs: https://support.dev.fiserv.com/openBanking/
 
 ### Repository & tools
