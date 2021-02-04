@@ -5,7 +5,11 @@ productPage:
   - journey Cards:
       - journeyCard:
         - title: Learn
-        - description: Learn to use Open Banking
+        - description: 'Use our AI-powered portal to quickly discover the right integration for your next app project.
+        
+        Experiment with our API’s in our intelligent API Explorer. 
+        
+        Browse sample code and follow our guided tutorials to learn best practices for integration.'
         - link: 
           - type: markdown
           - uri: /docs/learn.md
@@ -30,7 +34,9 @@ productPage:
               - uri: http://youtube.com/openBanking
       - journeyCard:
         - title: Build
-        - description: Build with OpenBanking
+        - description: 'Build on top of our sample code to get your app coded in minutes.
+        
+        Our lightweight SDK’s and plug-in’s might be the fastest path to completing your app.'
         - link: 
           - type: markdown
           - uri: /docs/build.md
