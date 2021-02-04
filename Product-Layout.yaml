@@ -28,7 +28,7 @@ productPage:
               - uri: /docs/tutorials.md
           - contextualNavigationCard:
             - title: Video
-            - description: Watch
+            - description: Watch what Financial Institutions need to know about Open Banking
             - link: 
               - type: externalLink # [externalLink | internalLink | markdown]
               - uri: https://www.youtube.com/watch?v=bm8gePjIWQM
