@@ -22,7 +22,7 @@ productPage:
               - uri: /docs/getting-started.md
           - contextualNavigationCard:
             - title: Tutorials
-            - description: Let's tut!
+            - description: Learn about Open Bank Project and make the most of your OBP investment.
             - link: 
               - type: markdown
               - uri: /docs/tutorials.md
