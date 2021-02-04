@@ -31,7 +31,7 @@ productPage:
             - description: Watch
             - link: 
               - type: externalLink # [externalLink | internalLink | markdown]
-              - uri: http://youtube.com/openBanking
+              - uri: https://www.youtube.com/watch?v=bm8gePjIWQM
       - journeyCard:
         - title: Build
         - description: 'Build on top of our sample code to get your app coded in minutes.
@@ -43,13 +43,13 @@ productPage:
         - contextualNavigationCards:
           - contextualNavigationCard:
             - title: SDKs
-            - description: Free SDKs!!!
+            - description: Use SDKs to accelarate your development
             - link: 
               - type: markdown
               - uri: /docs/sdks.md
           - contextualNavigationCard:
             - title: APIs
-            - description: API me!
+            - description: Explore all our APIs
             - cardType: reference | page
             - link: 
               - type: internalLink
