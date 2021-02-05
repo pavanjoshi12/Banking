@@ -2,6 +2,8 @@
 
 ## Welcome to Open Banking!
 
+With the digital transformation of financial services, collaboration is key to delivery of smart, secure, agile, relevant electronic experiences. Financial institutions are entering this era with momentum and the opportunity to leverage open banking and APIs to reimagine a new digital future. Learn how to manage this transformation.
+
 To help get you started, we’ve put together a few resources to help you learn about how to integrate with Open Banking.
 
 ## Intro to our resources
