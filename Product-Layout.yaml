@@ -49,6 +49,13 @@ productPage:
             - link: 
               - type: internalLink
               - uri: /docs/api # => http://dev.fiserv.com/docs/api
+          - contextualNavigationCard:
+            - title: Sample Code
+            - description: Free just like Costco samples & no limit
+            - cardType: reference | page
+            - link: 
+              - type: markdown
+              - uri: /docs/samples.md # => http://dev.fiserv.com/docs/api
       - journeyCard:
         - title: Test
         - description: 'Flex your app end-to-end in our full-featured Sandbox. Incorporate Sandbox testing into your CI pipeline. Use our intelligent Test Tracker to discover parts of your app that need more attention. *Requires registration'
