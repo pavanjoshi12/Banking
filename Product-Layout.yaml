@@ -16,13 +16,13 @@ productPage:
         - contextualNavigationCards: #cnav card
           - contextualNavigationCard:
             - title: Getting Started
-            - description: Learn how to integrate with Open Banking.
+            - description: Get Started with Open Banking.
             - link: 
               - type: markdown
               - uri: /docs/getting-started.md
           - contextualNavigationCard:
             - title: Tutorials
-            - description: Learn about OBP and make the most of your OBP investment.
+            - description: Learn how to integrate with Open Banking.
             - link: 
               - type: markdown
               - uri: /docs/tutorials.md
