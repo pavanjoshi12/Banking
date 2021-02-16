@@ -7,8 +7,8 @@
   "brandDescription": "Open banking is an important strategy for financial institutions to compete and grow. Banks can collaborate with Fintechs to deliver services as features within innovative distribution channels, create unique value propositions and differentiate through personalized digital experiences.Open banking enables financial institutions to use the wealth of data at their disposal to be truly innovative – launching new partnerships, new ways of engaging customers and new revenue opportunities.",
   "categories": [
     {
-      "name": "serviceTypes",
-      "value": "Service Types",
+      "name": "bankingServices",
+      "value": "Banking Services",
       "subcategories": [
         {
           "name": "accountServices",
