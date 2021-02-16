@@ -9,9 +9,12 @@ info:
   version: 11.0.0
 servers:
 - url: /
+
 paths:
   /accounts:
     get:
+      tags:
+       - Get All Accounts
       summary: Retrieves Multiple Accounts
       description: This implementation retrieves account information for multiple
         accounts in one request call.
@@ -127,6 +130,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/AcctInqRs'
     post:
+      tags:
+       - Add Accounts
       summary: Add account record
       description: This method adds an account.
       operationId: addAccount
@@ -162,6 +167,8 @@ paths:
                 $ref: '#/components/schemas/AcctAddRs'
   /accounts/{AcctId}:
     get:
+      tags:
+       - Get Account By Id
       summary: /accounts/{AcctId} - GET
       description: This method retrieves customer’s account information by their Account
         ID.
@@ -216,6 +223,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     put:
+      tags:
+       - Update Account
       summary: /accounts/{AcctId} - PUT
       description: This method modifies an account.
       operationId: updateAccount
