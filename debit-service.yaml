@@ -12,7 +12,7 @@ paths:
   /debits/{debitId}:
     get:
       tags:
-      - Debit Service
+      - Get Debit By Id
       summary: Retrieves a Debit Object
       operationId: DebitInqOperById
       parameters:
@@ -186,7 +186,7 @@ paths:
   /debits:
     get:
       tags:
-      - Debit Service
+      - Get All Debits
       summary: Retrieves a Debit Object
       operationId: DebitInqOper
       parameters:
@@ -359,7 +359,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       tags:
-      - Debit Service
+      - Update Debit
       summary: Modifies a Debit Object
       operationId: DebitRevOper
       parameters:
@@ -392,7 +392,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       tags:
-      - Debit Service
+      - Add Debit
       summary: Add a Debit Object
       operationId: DebitAddOper
       parameters:
