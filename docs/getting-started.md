@@ -44,18 +44,18 @@ Here are some resources that we recommend taking a look at!
 * Add your bank account and double-check that it’s correct. We’ll sometimes ask for more information to help us verify your bank account
 * After you make your first charge, just note that the first payout for every new Open Banking account is made 7 business days after the first successful payment is received - more about this here!
 
-[Import customer card numbers from another payment provider to Open banking]()
+[Import customer card numbers from another payment provider to Open banking](http://google.com)
 
 If you want to migrate customer card information from a different payment provider to Open banking, contact Open Banking support and we will walk you through…
 
-[Business identification and bank account ownership verification process]()
+[Business identification and bank account ownership verification process](http://google.com)
 
 To verify your business, Open Banking requires the following for review: Business ownership verification: We will confirm the identification information you…
 
-[Passport, ID, or driver's license upload requirement]()
+[Passport, ID, or driver's license upload requirement](http://google.com)
 
 In certain countries, Open Banking is required to collect, verify, and maintain identity information on the individuals associated with a Open Banking account…
 
-[Add a bank account for payouts]()
+[Add a bank account for payouts](http://google.com)
 
 If you do not have a bank account on file in Open Banking, you will need to add one before you’re able to receive payouts. To add a bank account Log into…
