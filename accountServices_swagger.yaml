@@ -21,6 +21,8 @@ servers:
 paths:
   /accounts:
     get:
+      tags:
+       - Get Accounts By Id
       summary: Retrieves Accounts associated with a customer or entity.
       description: This service retrieves accounts.
       operationId: AccountsInquiryOperator
@@ -110,6 +112,8 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /account/v1/{accountId}/balances:
     get:
+      tags:
+       - Get Balances By account id
       summary: Retrieves beneficiaries associated with a customer or entity.
       description: This service retrieves balances associated with a given account.
       operationId: BalanceInquiryOperator
@@ -200,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /account/v1/{accountId}/beneficiaries:
     get:
+      tags:
+       - Get Beneficiaries By Id
       summary: Retrieves beneficiaries associated with a customer or entity.
       description: This service retrieves beneficiaries.
       operationId: BeneficiaryInquiryOperator
@@ -290,6 +296,8 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /account/v1/{accountId}/cards:
     get:
+      tags:
+       - Get Cards By Id
       summary: Retrieves cards associated with a customer or entity.
       description: This service retrieves owners.
       operationId: CardListInquiryOperator
@@ -380,6 +388,8 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /account/v1/{accountId}/interest:
     get:
+      tags:
+       - Get Interest By Id
       summary: Retrieves interest paid or interest earned data related to an account
       description: This service retrieves interest related data.
       operationId: InterestInquiryOperator
@@ -470,6 +480,8 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /account/v1/{accountId}/loan:
     get:
+      tags:
+       - Get Loan Details By Id
       summary: Retrieves detail loan data related to an account
       description: This service retrieves interest related data.
       operationId: LoanInquiryOperator
@@ -560,6 +572,8 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /account/v1/{accountId}/overdrafts:
     get:
+      tags:
+       - Get Overdrafts By Id
       summary: Retrieves beneficiaries associated with a customer or entity.
       description: This service retrieves the list of overdraft accounts.
       operationId: OverdraftsInquiryOperator
@@ -650,6 +664,8 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /account/v1/{accountId}/owners:
     get:
+      tags:
+       - Get Owners By Id
       summary: Retrieves beneficiaries associated with a customer or entity.
       description: This service retrieves owners.
       operationId: OwnersInquiryOperator
@@ -740,6 +756,8 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /account/v1/{accountId}/payments:
     get:
+      tags:
+       - Get Payments By Id
       summary: Retrieves payment information associated with an account
       description: This service retrieves account payment information.
       operationId: PaymentInquiryOperator
@@ -830,6 +848,8 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /account/v1/{accountId}/transactions:
     get:
+      tags:
+       - Get Transactions By Id
       summary: Retrieves financial transactions associated with an account.   Retrieval
         occurs only after an initial account retrieval is performed  and an account
         ID is obtained.
@@ -958,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /account/v1/{accountId}/transactions/download:
     get:
+      tags:
+       - Download Transaction details By Id
       summary: Retrieves financial transactions associated with an account.   Retrieval
         occurs only after an initial account retrieval is performed  and an account
         ID is obtained.
