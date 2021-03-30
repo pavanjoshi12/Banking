@@ -11,7 +11,7 @@ Open banking is an important strategy for financial institutions to compete and 
 
 Here are some resources that we recommend taking a look at!
 
-### Integration docs
+### Integration documentation
 
 * Open Banking Docs: [https://dev.fiserv.com/openBanking/docs](https://dev.fiserv.com/openBanking/docs)
 * API Docs: https://dev.fiserv.com/openBanking/docs/api
