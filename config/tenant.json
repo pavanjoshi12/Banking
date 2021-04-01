@@ -25,8 +25,8 @@
       "featured": true,
       "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
       "description": "This Fiserv solution will help financial institutions offer their own open banking portal – enabling them to offer Banking as a Service, co-innovate with Fintechs, deliver financial services through exciting new channels and accelerate time to market.",
-      "apiSpecification": "/v1/products/openbanking/swagger",
-      "layout": "/v1/products/openbanking/layouts/productPage",
+      "apiSpecification": "/v1/apis",
+      "layout": "/v1/layouts",
       "documentation": "/v1/docs",
       "documenttree": "/v1/docs",
       "documenttreeV2": "/v2/docs"
