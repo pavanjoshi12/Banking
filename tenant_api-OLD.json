@@ -1,0 +1,76 @@
+{
+  "title": "Banking",
+  "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+  "description": "Open banking is an important strategy for financial institutions to compete and grow. Banks can collaborate with Fintechs to deliver services as features within innovative distribution channels, create unique value propositions and differentiate through personalized digital experiences.Open banking enables financial institutions to use the wealth of data at their disposal to be truly innovative – launching new partnerships, new ways of engaging customers and new revenue opportunities.",
+  "tags": [
+    "banking",
+    "openBanking"
+  ],"categories": [
+    {
+      "categoryId": 501,
+      "name": "Banking",
+      "value": "Banking",
+      "subcategories": []
+    },
+    {
+      "categoryId": 502,
+      "name": "openBanking",
+      "value": "Open Banking",
+      "subcategories": []
+    },
+    {
+      "categoryId": 503,
+      "name": "AccountServices",
+      "value": "Account services",
+      "subcategories": []
+    },
+    {
+      "categoryId": 504,
+      "name": "DebitServices",
+      "value": "Debit services",
+      "subcategories": []
+    }],
+  "solution": "Banking",
+  "products": [
+    {
+      "id": "5",
+      "name": "AccountServices",
+      "title": "Account Services",
+      "featured": true,
+      "categories": [
+        "openBanking",
+        "Banking",
+        "AccountServices"
+      ],
+      "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+      "description": "This Fiserv solution will help financial institutions offer their own open banking portal – enabling them to offer Banking as a Service, co-innovate with Fintechs, deliver financial services through exciting new channels and accelerate time to market.",
+      "apiSpecification": "/v1/products/openbanking/swagger",
+      "documentation": "/v1/products/openbanking/docs",
+      "layout": "/v1/products/openbanking/layouts/productPage",
+       "tags": [
+        "banking",
+        "openBanking"
+      ]
+    },
+    {
+      "id": "6",
+      "name": "DebitServices",
+      "title": "Debit Services",
+      "categories": [
+        "openBanking",
+        "Banking",
+        "DebitServices"
+      ],
+      "featured": false,
+      "logoURL": "https://s7d2.scene7.com/is/image/fiserv/GettyImages-838090142",
+      "description": "This Fiserv solution will help financial institutions offer their own open banking portal – enabling them to offer Banking as a Service, co-innovate with Fintechs, deliver financial services through exciting new channels and accelerate time to market.",
+      "apiSpecification": "/v1/products/openbanking/swagger",
+      "documentation": "/v1/products/openbanking/docs",
+      "layout": "/v1/products/openbanking/layouts/productPage",
+      "tags": [
+        "banking",
+        "openBanking"
+      ]
+    }
+  ]
+}

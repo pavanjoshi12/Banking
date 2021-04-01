@@ -1,0 +1,5575 @@
+openapi: 3.0.0
+info:
+  title: Account Service
+  description: |
+    "The Account service supports operations to manage product accounts serviced by financial institutions. An account is a product serviced by a financial institution (FI) that carries a balance (credit or debit) in a particular currency. Generally account types fall into one of two major classifications: deposit or loan product account. Consumers use this service to retrieve information about accounts but it is also used by consumers to create new account product and maintain the information of these account products."
+  contact:
+    name: Vaida Juskeviciute Dadla
+    email: Vaida.JuskeviciuteDadla@Fiserv.com
+  version: 11.0.0
+servers:
+- url: /
+
+paths:
+  /accounts:
+    get:
+      tags:
+       - Get All Accounts
+      summary: Retrieves Multiple Accounts
+      description: This implementation retrieves account information for multiple
+        accounts in one request call.
+      operationId: getAccounts
+      parameters:
+      - name: EFXHeader
+        in: header
+        description: The message header request aggregate contains common information
+          for all request messages
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/EfxHeaders'
+      - name: AcctId
+        in: query
+        description: Id of an account (AcctRec)
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: AcctType
+        in: query
+        description: Account type of an account
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $filter
+        in: query
+        description: The $filter system query option allows clients to filter a collection
+          of resources that are addressed by a request URL. The expression specified
+          with $filter is evaluated for each resource in the collection, and only
+          items where the expression evaluates to true are included in the response.
+          Resources for which the expression evaluates to false or to null, or which
+          reference properties that are unavailable due to permissions, are omitted
+          from the response.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $fields
+        in: query
+        description: The $fields system query option requests that the service return
+          only the properties explicitly requested by the client. The service MUST
+          return the specified content, and MAY choose to return additional information.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $limit
+        in: query
+        description: The $limit System Query Option specifies that only the first
+          n records SHOULD be returned, where n is a non-negative integer value specified
+          by the $limit query option.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $offset
+        in: query
+        description: The $offset System Query Option specifies that the result MUST
+          NOT include the first n entities, where n is a non-negative integer value
+          specified by the $offset query option.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $order_by
+        in: query
+        description: The $orderby system query option allows clients to request resources
+          in a particular order.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $exclude_url
+        in: query
+        description: When exclude_url is set to true, the url for each resource will
+          not be part of the response.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $exclude_rec
+        in: query
+        description: When exclude_rec is set to true, the record for each resource
+          will not be part of the response.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcctInqRs'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcctInqRs'
+    post:
+      tags:
+       - Add Accounts
+      summary: Add account record
+      description: This method adds an account.
+      operationId: addAccount
+      parameters:
+      - name: EFXHeader
+        in: header
+        description: The message header request aggregate contains common information
+          for all request messages
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/EfxHeaders'
+      requestBody:
+        description: Modify Information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcctAddRq'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcctAddRs'
+        default:
+          description: See HTTP Status Code Standards
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcctAddRs'
+  /accounts/{AcctId}:
+    get:
+      tags:
+       - Get Account By Id
+      summary: /accounts/{AcctId} - GET
+      description: This method retrieves customer’s account information by their Account
+        ID.
+      operationId: getAccountByAcctId
+      parameters:
+      - name: EFXHeader
+        in: header
+        description: The message header request aggregate contains common information
+          for all request messages
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/EfxHeaders'
+      - name: AcctId
+        in: path
+        description: id of an account (AcctRec)
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: AcctType
+        in: query
+        description: account type of an account
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        description: The $select system query option requests that the service return
+          only the properties explicitly requested by the client. The service MUST
+          return the specified content, and MAY choose to return additional information.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcctInqRs'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+       - Update Account
+      summary: /accounts/{AcctId} - PUT
+      description: This method modifies an account.
+      operationId: updateAccount
+      parameters:
+      - name: EFXHeader
+        in: header
+        description: The message header request aggregate contains common information
+          for all request messages
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/EfxHeaders'
+      - name: AcctId
+        in: path
+        description: id of an account (AcctRec)
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: AcctRec
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcctRec'
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcctModRs'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    AcctAddRs:
+      type: object
+      properties:
+        Messages:
+          type: array
+          description: More than one errors, warnings or informational messages may
+            be returned in the response.
+          items:
+            $ref: '#/components/schemas/Message'
+        url:
+          type: string
+    AcctModRs:
+      type: object
+      properties:
+        Messages:
+          type: array
+          description: More than one errors, warnings or informational messages may
+            be returned in the response.
+          items:
+            $ref: '#/components/schemas/Message'
+    Message:
+      required:
+      - code
+      - description
+      - source
+      - type
+      properties:
+        code:
+          maxLength: 20
+          type: string
+          description: Error, warning or informational message code from the source
+            of the message.
+        description:
+          maxLength: 255
+          type: string
+          description: Error, warning or informational message description from the
+            source of the message.
+        type:
+          type: string
+          description: Type of the message. Valid values are Error, Warning, Info.
+          enum:
+          - Error
+          - Warning
+          - Info
+        source:
+          type: string
+          description: Source of the error, warning or informational message. Example
+            Service Provider name.
+      description: More than one errors, warnings or informational messages may be
+        returned in the response.
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        fields:
+          type: string
+    EfxHeaders:
+      required:
+      - organizationId
+      type: string
+      properties:
+        organizationId:
+          type: string
+        trnId:
+          maxLength: 30
+          type: string
+        context:
+          $ref: '#/components/schemas/Context'
+    Context:
+      type: object
+      properties:
+        clientAppName:
+          maxLength: 40
+          type: string
+          description: Client Application Name of the application making the service
+            request (e.g. Architect, Commercial Center, etc.).
+        channel:
+          type: string
+          description: Indicates the channel used by the client application.
+        clientDateTime:
+          type: string
+          description: Client date and time as reported by the client application
+            that is making the service request.
+          format: date-time
+        clientTerminalSeqNum:
+          maxLength: 36
+          type: string
+          description: Also known as Trace Number or Sequence in some systems. Used
+            to allow the client terminal to set a unique identifier for the transaction.
+            When used by a Network defined transaction the value of this identifier
+            is typically set to narrow character of 12.
+        originatorType:
+          type: integer
+          description: The type of organization that the originator represents. This
+            is usually a coded value representing the industry that the organization
+            operates in. It contains the SIC code. For ISO 8583 (DE18) the element
+            is restricted to narrow character of maximum lenght of 4. Originator Type
+            codes that apply to financial institutions are:- • 6010 - Financial institution—bank,
+            savings and loan (S and L), or credit union • 6011 - Financial institution—ATM
+            • 6012 - Financial institution—merchandise sale • 6999 - Financial institution—home
+            banking
+          format: int64
+        terminalIdent:
+          maxLength: 36
+          type: string
+          description: Unique code identifying a terminal at the card acceptor locatio
+            (such as terminal code or terminal number of ATM). See For ISO 8583 (DE41)
+            the element is restricted to a narrow character with maximum length of
+            8.
+        terminalAddr1:
+          maxLength: 64
+          type: string
+        terminalAddr2:
+          maxLength: 64
+          type: string
+        terminalAddr3:
+          maxLength: 64
+          type: string
+        terminalAddr4:
+          maxLength: 64
+          type: string
+        terminalCity:
+          maxLength: 32
+          type: string
+        terminalCounty:
+          maxLength: 32
+          type: string
+        terminalStateProv:
+          maxLength: 32
+          type: string
+          description: State Province. ISO 3166-2:US codes.
+        terminalPostalCode:
+          maxLength: 11
+          type: string
+          description: Postal Code is ZipCode in the US.
+        terminalCountryCodeSource:
+          type: string
+          description: Country code source.ISO3166-Numeric, ISO3166-Alpha-3
+          enum:
+          - US
+          - IND
+        terminalCountryCodeValue:
+          maxLength: 80
+          type: string
+        phoneType:
+          type: string
+        phoneNum:
+          type: string
+        phoneExchange:
+          type: string
+        terminalOwnerName:
+          maxLength: 40
+          type: string
+          description: Name of the owner or operator of the terminal.  For ISO 8583
+            (DE43) the element is restricted to C-15.
+        systTraceAuditNum:
+          maxLength: 36
+          type: string
+          description: Number assigned by the transaction originator to assist in
+            identifying a transaction uniquely. The trace number remains unchanged
+            for all messages throughout the life of a transaction. This number is
+            not a terminal receipt number. The originating processor increments the
+            trace number by one for each transaction sent to the switch. For ISO 8583
+            (DE11) the element is restricted to NC-6
+        networkIdent:
+          maxLength: 80
+          type: string
+          description: Identifies the interchange network for the transaction. The
+            transaction is applied to the specified network settlement counts and
+            balances. For ISO 8583 (DE62) the element is restricted to NC-6
+        networkRefIdent:
+          maxLength: 36
+          type: string
+          description: Document reference supplied by the system retaining the original
+            source document and used to assist in locating that document. The acquirer
+            of a transaction assigns this number. The issuer processor must retain
+            it in the event that a chargeback is submitted for the transaction. For
+            ISO 8583 (DE37) the element is restricted to C-12
+        acquirerIdent:
+          maxLength: 36
+          type: string
+          description: Identifies the acquirer of the authorization or financial transaction.
+            It is a mandatory element in all authorization and financial messages
+            and does not change throughout the life of a transaction. EPOC considers
+            the acquirer as the terminal owner for reporting purposes. For ISO 8583
+            (DE32) the element is restricted to C-12
+        acquirerCountryCodeSource:
+          type: string
+          description: Country code source.ISO3166-Numeric, ISO3166-Alpha-3
+          enum:
+          - US
+          - IND
+        acquirerCountryCodeValue:
+          type: string
+        merchNum:
+          maxLength: 23
+          type: string
+          description: Merchant Number. For ISO 8583 (DE42) the element is restricted
+            to C-15
+        settlementDate:
+          type: string
+          description: This is the date on which the transaction will be settled.
+            Used by ISO 8583 (DE63)
+          format: date
+        settlementIdent:
+          maxLength: 36
+          type: string
+          description: This is the identification of the settlement account in which
+            the transaction will be settled.
+        businessApplIdent:
+          type: string
+          description: This is the identification of the settlement account in which
+            the transaction will be settled.
+        branchIdent:
+          maxLength: 22
+          type: string
+        tellerIdent:
+          type: string
+        tillIdent:
+          type: string
+        ampmCode:
+          type: string
+          enum:
+          - AM
+          - PM
+        reentryType:
+          type: string
+          enum:
+          - Manual
+          - Auto
+    AddrAddRs:
+      type: object
+      properties:
+        Messages:
+          type: array
+          description: More than one errors, warnings or informational messages may
+            be returned in the response.
+          items:
+            $ref: '#/components/schemas/Message'
+        AddrStatusRec:
+          $ref: '#/components/schemas/AddrStatusRec'
+    AddrStatusRec:
+      type: object
+      properties:
+        SvcIdent:
+          $ref: '#/components/schemas/SvcIdent'
+        AddrKeys:
+          $ref: '#/components/schemas/AddrKeys'
+        AddrStatus:
+          $ref: '#/components/schemas/AddrStatus'
+    AddrStatus:
+      type: object
+      properties:
+        AddrStatusCode:
+          type: string
+        EffDt:
+          type: string
+    PortAddRs:
+      type: object
+      properties:
+        Messages:
+          type: array
+          description: More than one errors, warnings or informational messages may
+            be returned in the response.
+          items:
+            $ref: '#/components/schemas/Message'
+        PortStatusRec:
+          $ref: '#/components/schemas/PortStatusRec'
+    PortStatusRec:
+      type: object
+      properties:
+        SvcIdent:
+          $ref: '#/components/schemas/SvcIdent'
+        PortKeys:
+          $ref: '#/components/schemas/PortKeys'
+        PortStatus:
+          $ref: '#/components/schemas/PortStatus'
+    PortStatus:
+      type: object
+      properties:
+        PortStatusCode:
+          type: string
+        EffDt:
+          type: string
+    CreditLineAddRs:
+      type: object
+      properties:
+        Messages:
+          type: array
+          description: More than one errors, warnings or informational messages may
+            be returned in the response.
+          items:
+            $ref: '#/components/schemas/Message'
+        CreditLineStatusRec:
+          $ref: '#/components/schemas/CreditLineStatusRec'
+    CreditLineStatusRec:
+      type: object
+      properties:
+        SvcIdent:
+          $ref: '#/components/schemas/SvcIdent'
+        CreditLineKeys:
+          $ref: '#/components/schemas/CreditLineKeys'
+        CreditLineStatus:
+          $ref: '#/components/schemas/CreditLineStatus'
+    CreditLineStatus:
+      type: object
+      properties:
+        CreditLineStatusCode:
+          type: string
+        EffDt:
+          type: string
+    CreditLineAddRq:
+      type: object
+      properties:
+        OvrdAutoAckInd:
+          type: boolean
+        OvrdExceptionData:
+          $ref: '#/components/schemas/OvrdExceptionData'
+        PartyAcctRelInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartyAcctRelInfo'
+        CreditLineInfo:
+          $ref: '#/components/schemas/CreditLineInfo'
+    CreditLineKeys:
+      type: object
+      properties:
+        SvcIdent:
+          $ref: '#/components/schemas/SvcIdent'
+        CreditLineId:
+          type: string
+        AcctKeys:
+          $ref: '#/components/schemas/AcctKeys'
+        CreditLineIdent:
+          type: string
+      allOf:
+      - $ref: '#/components/schemas/BaseKeys_Type'
+    CreditLineInfo:
+      type: object
+      properties:
+        CommitmentIdent:
+          type: string
+        MaxCreditCode:
+          type: string
+        TotalLTVPct:
+          type: string
+        LTVPct:
+          type: string
+        RunningLTVPct:
+          type: string
+        Insurance:
+          type: array
+          items:
+            $ref: '#/components/schemas/Insurance'
+        CreditLineData:
+          $ref: '#/components/schemas/CreditLineData'
+        SinglePremiumInsurance:
+          type: array
+          items:
+            $ref: '#/components/schemas/SinglePremiumInsurance'
+        CreditLineCode:
+          type: string
+        CreditLineCodeEnumDesc:
+          type: string
+        DailyAccrualFactor:
+          type: string
+        PartDailyAccrualFactor:
+          type: string
+        CensusTract:
+          type: string
+        MSACode:
+          type: integer
+      allOf:
+      - $ref: '#/components/schemas/AcctInfo'
+    CreditLineData:
+      type: object
+      properties:
+        CreditLineLimitAmt:
+          $ref: '#/components/schemas/CurAmt'
+        Priority:
+          type: string
+        ApprovalDt:
+          type: string
+        ReviewFrequency:
+          $ref: '#/components/schemas/RecurRule'
+        NextReviewDt:
+          type: string
+        GroupIndicator:
+          type: string
+    PortAddRq:
+      type: object
+      properties:
+        OvrdAutoAckInd:
+          type: boolean
+        OvrdExceptionData:
+          $ref: '#/components/schemas/OvrdExceptionData'
+        PartyPortRelInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartyPortRelInfo'
+        PortInfo:
+          $ref: '#/components/schemas/PortInfo'
+    PartyPortRelInfo:
+      type: object
+      properties:
+        PartyRef:
+          $ref: '#/components/schemas/PartyRef'
+        PortRef:
+          $ref: '#/components/schemas/PortRef'
+        PartyPortRelData:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartyPortRelData'
+        OwnerPercent:
+          type: string
+        OwnerInd:
+          type: boolean
+        TaxReportingOwnerInd:
+          type: boolean
+        Nickname:
+          type: string
+        PortRelClass:
+          type: string
+    PortRef:
+      type: object
+      properties:
+        PortKeys:
+          $ref: '#/components/schemas/PortKeys'
+        PortSummInfo:
+          $ref: '#/components/schemas/PortSummInfo'
+    PortKeys:
+      allOf:
+      - $ref: '#/components/schemas/BaseKeys_Type'
+    PortSummInfo:
+      type: object
+      properties:
+        PortType:
+          type: string
+        FullName:
+          type: string
+        PostAddr:
+          $ref: '#/components/schemas/PostAddr'
+    PartyPortRelData:
+      type: object
+      properties:
+        PartyPortRelDesc:
+          type: string
+        PartyPortRelOrder:
+          type: string
+    PortInfo:
+      type: object
+      properties:
+        OpenDt:
+          type: string
+        RelationshipMgr:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipMgr'
+        OriginatingBranch:
+          type: string
+        OriginatingBranchEnumDesc:
+          type: string
+        PreferredBranch:
+          type: string
+        PreferredBranchEnumDesc:
+          type: string
+        ResponsibleBranch:
+          type: string
+        ResponsibleBranchEnumDesc:
+          type: string
+        NicknameOption:
+          type: string
+        NicknameOptionEnumDesc:
+          type: string
+        Nickname:
+          type: string
+        PortOpenMethod:
+          type: string
+        PortOpenMethodEnumDesc:
+          type: string
+        PostAddr:
+          type: array
+          items:
+            $ref: '#/components/schemas/PostAddr'
+        PortStmtData:
+          type: string
+    AddrDelRq:
+      type: object
+      properties:
+        OvrdAutoAckInd:
+          type: boolean
+        OvrdExceptionData:
+          $ref: '#/components/schemas/OvrdExceptionData'
+        AddrKeys:
+          $ref: '#/components/schemas/AddrKeys'
+    AddrDelRs:
+      type: object
+      properties:
+        Messages:
+          type: array
+          description: More than one errors, warnings or informational messages may
+            be returned in the response.
+          items:
+            $ref: '#/components/schemas/Message'
+        AddrStatusRec:
+          $ref: '#/components/schemas/AddrStatusRec'
+    AddrAddRq:
+      type: object
+      properties:
+        OvrdAutoAckInd:
+          type: boolean
+        OvrdExceptionData:
+          $ref: '#/components/schemas/OvrdExceptionData'
+        PartyAcctRelInfo:
+          $ref: '#/components/schemas/PartyAddrRelInfo'
+        AcctAddrRelInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcctAddrRelInfo'
+        AddrInfo:
+          $ref: '#/components/schemas/AddrInfo'
+    AddrInfo:
+      type: object
+      properties:
+        AddrRelRef:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddrRelRef'
+        PostAddr:
+          type: array
+          items:
+            $ref: '#/components/schemas/PostAddr'
+        RestrictedInd:
+          type: boolean
+        UpdateContactCode:
+          type: string
+    AddrRelRef:
+      type: object
+      properties:
+        PartyKeys:
+          $ref: '#/components/schemas/PartyKeys'
+        AcctKeys:
+          $ref: '#/components/schemas/AcctKeys'
+        AddrKeys:
+          $ref: '#/components/schemas/AddrKeys'
+        AddrUse:
+          type: string
+        AddrType:
+          type: string
+    PartyAddrRelInfo:
+      type: object
+      properties:
+        PartyRef:
+          $ref: '#/components/schemas/PartyRef'
+        AddrRef:
+          $ref: '#/components/schemas/AddrRef'
+    AcctAddrRelInfo:
+      type: object
+      properties:
+        AcctRef:
+          $ref: '#/components/schemas/AcctRef'
+        AddrRef:
+          $ref: '#/components/schemas/AddrRef'
+    AddrRef:
+      type: object
+      properties:
+        AddrKeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddrKeys'
+    AddrKeys:
+      type: object
+      properties:
+        AddrId:
+          type: string
+        PartyKeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartyKeys'
+    AcctModRq:
+      type: object
+      properties:
+        OvrdAutoAckInd:
+          type: boolean
+        OvrdExceptionData:
+          $ref: '#/components/schemas/OvrdExceptionData'
+        AcctKeys:
+          $ref: '#/components/schemas/AcctKeys'
+        DepositAcctInfo:
+          $ref: '#/components/schemas/DepositAcctInfo'
+        LoanAcctInfo:
+          $ref: '#/components/schemas/LoanAcctInfo'
+    AcctAddRq:
+      type: object
+      properties:
+        OvrdAutoAckInd:
+          type: boolean
+        OvrdExceptionData:
+          $ref: '#/components/schemas/OvrdExceptionData'
+        PartyAcctRelInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartyAcctRelInfo'
+        DepositAcctInfo:
+          $ref: '#/components/schemas/DepositAcctInfo'
+        LoanAcctInfo:
+          $ref: '#/components/schemas/LoanAcctInfo'
+    AcctInqRs:
+      type: object
+      properties:
+        hasMore:
+          type: boolean
+        Messages:
+          type: array
+          description: More than one errors, warnings or informational messages may
+            be returned in the response.
+          items:
+            $ref: '#/components/schemas/Message'
+        RecCtrlOut:
+          $ref: '#/components/schemas/RecCtrlOut'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcctInqRs_links'
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcctInqRs_values'
+    ExternalFIData:
+      type: object
+      properties:
+        AliasType:
+          type: string
+        AliasTypeEnumDesc:
+          type: string
+        AliasAcctId:
+          type: string
+        FIIdentType:
+          type: string
+        FIIdent:
+          type: string
+        Name:
+          type: string
+        BranchIdent:
+          type: string
+        BranchName:
+          type: string
+        PostAddr:
+          $ref: '#/components/schemas/PostAddr'
+        EffDt:
+          type: string
+          format: datetime
+          nullable: true
+      description: External Financial Institution Data.
+    RecCtrlOut:
+      type: object
+      properties:
+        SentRecCount:
+          type: integer
+        MatchedRecCount:
+          type: integer
+        RemainRecCount:
+          type: integer
+        Cursor:
+          type: string
+    ExternalAcctInfo:
+      type: object
+      properties:
+        ExternalFIData:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalFIData'
+      description: External Account Information. Contains the details of a Loan Account.
+      allOf:
+      - $ref: '#/components/schemas/AcctInfo'
+    AcctRec:
+      type: object
+      properties:
+        AcctKeys:
+          $ref: '#/components/schemas/AcctKeys'
+        DepositAcctInfo:
+          $ref: '#/components/schemas/DepositAcctInfo'
+        LoanAcctInfo:
+          $ref: '#/components/schemas/LoanAcctInfo'
+        ExternalAcctInfo:
+          $ref: '#/components/schemas/ExternalAcctInfo'
+        AcctStatus:
+          $ref: '#/components/schemas/AcctStatus'
+        Messages:
+          type: array
+          description: More than one errors, warnings or informational messages may
+            be returned in the response.
+          items:
+            $ref: '#/components/schemas/Message'
+      description: see [AcctRec](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=4624)
+        for indepth description
+    AcctStatus:
+      required:
+      - AcctStatusCode
+      type: object
+      properties:
+        AcctStatusCode:
+          type: string
+        EffDt:
+          type: string
+          format: datetime
+      description: see [AcctStatus](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=4620)
+        for indepth description
+    AcctBal:
+      required:
+      - BalType
+      - CurAmt
+      type: object
+      properties:
+        BalType:
+          type: string
+        BalTypeEnumDesc:
+          type: string
+        CurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        ExpDt:
+          type: string
+          format: datetime
+        Desc:
+          type: string
+      description: see [AcctBal](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=427)
+        for indepth description
+    AcctIdent:
+      type: string
+      properties:
+        AcctIdentType:
+          type: string
+        AcctIdentValue:
+          maxLength: 36
+          type: string
+      description: see [AcctIdent](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=4679)
+        for indepth description
+    FloatDetails:
+      type: object
+      properties:
+        FloatDays:
+          type: integer
+          format: int64
+        CheckFloatAmt:
+          $ref: '#/components/schemas/CurAmt'
+        CashFloatAmt:
+          $ref: '#/components/schemas/CurAmt'
+    FloatData:
+      type: object
+      properties:
+        FloatType:
+          type: string
+        FloatTypeEnumDesc:
+          type: string
+        ExceptionFloatInd:
+          type: boolean
+        FundsAvailInd:
+          type: boolean
+        ImmediateCreditAmt:
+          $ref: '#/components/schemas/CurAmt'
+        FloatDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/FloatDetails'
+    SvcChgMethod:
+      type: object
+      properties:
+        SvcChgMethodType:
+          type: string
+        SvcChgMethodTypeEnumDesc:
+          type: string
+        SvcChgMethodOpt:
+          type: integer
+          format: int64
+    CreditBackAcct:
+      required:
+      - CreditBackIdent
+      type: object
+      properties:
+        CreditBackIdent:
+          type: string
+        CreditBackType:
+          type: string
+        CreditBackTypeEnumDesc:
+          type: string
+        CreditBackAcctId:
+          type: string
+    PmtPostingRestrictions:
+      type: object
+      properties:
+        PostingStatus:
+          type: string
+        PostingStatusEnumDesc:
+          type: string
+        RestrictionReasonCode:
+          type: string
+        RestrictionReasonCodeEnumDesc:
+          type: string
+        RestrictionOvrdInd:
+          type: boolean
+    AdvPostingRestrictions:
+      type: object
+      properties:
+        PostingStatus:
+          type: string
+        RestrictionOvrdInd:
+          type: boolean
+          nullable: true
+        RestrictionReasonCode:
+          type: string
+        RestrictionReasonCodeEnumDesc:
+          type: string
+        RestrictionPastDueDays:
+          type: integer
+          format: int64
+    PmtCompositeAmt:
+      type: object
+      properties:
+        CompositeCurAmtType:
+          type: string
+        CompositeCurAmtTypeEnumDesc:
+          type: string
+        CompositeSeqId:
+          type: string
+        CurAmt:
+          $ref: '#/components/schemas/CurAmt'
+    DuePmt:
+      type: object
+      properties:
+        PmtCompositeAmt:
+          type: array
+          items:
+            $ref: '#/components/schemas/PmtCompositeAmt'
+        DueDt:
+          type: string
+          format: datetime
+          nullable: true
+    BillStatus:
+      required:
+      - BillStatusCode
+      type: object
+      properties:
+        BillStatusCode:
+          type: string
+        BillStatusCodeEnumDesc:
+          type: string
+    NextPmt:
+      type: object
+      properties:
+        PmtCompositeAmt:
+          type: array
+          items:
+            $ref: '#/components/schemas/PmtCompositeAmt'
+        BillStatus:
+          $ref: '#/components/schemas/BillStatus'
+        PmtDt:
+          type: string
+          format: datetime
+          nullable: true
+    RegPmt:
+      type: object
+      properties:
+        PmtCompositeAmt:
+          type: array
+          items:
+            $ref: '#/components/schemas/PmtCompositeAmt'
+    LastPmt:
+      type: object
+      properties:
+        PmtCompositeAmt:
+          type: array
+          items:
+            $ref: '#/components/schemas/PmtCompositeAmt'
+        PmtDt:
+          type: string
+          format: datetime
+          nullable: true
+        InterestPaidToDt:
+          type: string
+          format: datetime
+          nullable: true
+        PrincipalPaidToDt:
+          type: string
+          format: datetime
+    AcctSummInfo:
+      type: object
+      properties:
+        RetirementPlanIdent:
+          type: string
+        RetirementPlanType:
+          type: string
+        RetirementPlanTypeEnumDesc:
+          type: string
+        FRALoanInd:
+          type: boolean
+          nullable: true
+        NonAccrualInd:
+          type: boolean
+          nullable: true
+        NonAccrualCode:
+          type: string
+        NonAccrualCodeEnumDesc:
+          type: string
+        ChargeOffInd:
+          type: boolean
+          nullable: true
+        ChargeOffCode:
+          type: string
+        ChargeOffCodeEnumDesc:
+          type: string
+        PmtPostingRestrictions:
+          $ref: '#/components/schemas/PmtPostingRestrictions'
+        AdvPostingRestrictions:
+          $ref: '#/components/schemas/AdvPostingRestrictions'
+        CardType:
+          type: string
+        CardTypeEnumDesc:
+          type: string
+        IssueDt:
+          type: string
+          format: datetime
+        ExpDt:
+          type: string
+          format: datetime
+        BoxNum:
+          type: string
+        DuePmt:
+          $ref: '#/components/schemas/DuePmt'
+        NextPmt:
+          $ref: '#/components/schemas/NextPmt'
+        LastPmt:
+          $ref: '#/components/schemas/LastPmt'
+      allOf:
+      - $ref: '#/components/schemas/AcctInfo'
+    AcctRef:
+      type: object
+      properties:
+        AcctKeys:
+          $ref: '#/components/schemas/AcctKeys'
+        AcctSummInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcctSummInfo'
+      description: see [AcctRef](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=6947)
+        for indepth description
+    SvcChgFlatFeeIdentAndSvcChgFlatFeeAmt:
+      type: object
+      properties:
+        SvcChgFlatFeeIdent:
+          type: string
+        SvcChgFlatFeeAmt:
+          $ref: '#/components/schemas/CurAmt'
+    SvcChgFlatFee:
+      type: object
+      properties:
+        SvcChgFlatFeeType:
+          type: string
+        SvcChgFlatFeeTypeEnumDesc:
+          type: string
+        SvcChgFlatFeeIdent:
+          type: string
+        SvcChgFlatFeeAmt:
+          $ref: '#/components/schemas/CurAmt'
+    ClubPayoffAcctRef:
+      type: object
+      properties:
+        TrnCode:
+          type: string
+        ACHTrnCode:
+          type: string
+        ACHReceivingType:
+          type: string
+        ACHCompanyEntryDesc:
+          type: string
+        SameDayInd:
+          type: boolean
+          nullable: true
+      description: ClubPayoffAcctRef
+      allOf:
+      - $ref: '#/components/schemas/AcctRef'
+    SvcChgTimeFrame:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/RecurRule'
+    SvcChgData:
+      type: object
+      properties:
+        SvcChgMethod:
+          type: array
+          items:
+            $ref: '#/components/schemas/SvcChgMethod'
+        CreditBackMethod:
+          type: string
+        CreditBackMethodEnumDesc:
+          type: string
+        CreditBackAcct:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditBackAcct'
+        SvcChgRelatedAcct:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcctRef'
+        CreditBackGroupIdent:
+          type: string
+        SvcChgFlatFee:
+          type: array
+          items:
+            $ref: '#/components/schemas/SvcChgFlatFee'
+        SvcChgAcctRef:
+          $ref: '#/components/schemas/AcctRef'
+        SvcChgWaiveCode:
+          type: integer
+          format: int64
+        SvcChgWaiveCodeEnumDesc:
+          type: string
+        SvcChgWaiveCycles:
+          type: integer
+          format: int64
+        SvcChgWaiveTaxInd:
+          type: boolean
+          nullable: true
+        NextSvcChgDt:
+          type: string
+          format: datetime
+          nullable: true
+        LastSvcChgDt:
+          type: string
+          format: datetime
+        SvcChgTimeFrame:
+          type: array
+          items:
+            $ref: '#/components/schemas/SvcChgTimeFrame'
+        IncAcctRelSvcChgInd:
+          type: boolean
+        SvcChgBillDayOfMonth:
+          type: string
+        SvcChgBillDeferDays:
+          type: integer
+          format: int64
+    AnalysisChargeAcct:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AcctRef'
+    CommercialAnalysisData:
+      type: object
+      properties:
+        AnalysisCode:
+          type: string
+        AnalysisCodeEnumDesc:
+          type: string
+        AnalysisGroup:
+          type: integer
+          format: int64
+        AnalysisChargeAcct:
+          $ref: '#/components/schemas/AnalysisChargeAcct'
+    CorrespondingPoolData:
+      type: object
+      properties:
+        CorrespondingPoolCode:
+          type: string
+        CorrespondingPoolIndex:
+          type: integer
+          format: int64
+        CorrespondingPoolRate:
+          type: number
+        CorrespondingPoolVariance:
+          type: number
+    RegCCNSF:
+      required:
+      - NSFIdent
+      - RegCC_NSFType
+      type: object
+      properties:
+        NSFIdent:
+          type: string
+        RegCC_NSFType:
+          type: string
+        Count:
+          type: integer
+          format: int64
+    RegCCData:
+      type: object
+      properties:
+        RegCCStatus:
+          type: string
+        RegCCStatusEnumDesc:
+          type: string
+        RegCCStatusDt:
+          type: string
+          format: datetime
+        RegCCException:
+          type: string
+        RegCCExceptionExpDt:
+          type: string
+          format: datetime
+        RegCC_NSF:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegCCNSF'
+    NSFEntry:
+      type: object
+      properties:
+        NSFIdent:
+          type: string
+        NSFDt:
+          type: string
+          format: datetime
+        Count:
+          type: integer
+          format: int64
+    Email:
+      type: object
+      properties:
+        EmailIdent:
+          type: string
+        EmailType:
+          type: string
+        EmailTypeEnumDesc:
+          type: string
+        EmailAddr:
+          type: string
+        PreferredEmail:
+          type: boolean
+          nullable: true
+        Priority:
+          type: string
+      description: see [Email](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=4348)
+        for indepth description
+    WebAddr:
+      type: object
+      properties:
+        WebAddrIdent:
+          type: integer
+          format: int64
+        WebAddrType:
+          type: string
+        WebAddrTypeEnumDesc:
+          type: string
+        WebAddrLink:
+          type: string
+        PreferredWebAddr:
+          type: boolean
+          nullable: true
+    Contact:
+      type: object
+      properties:
+        PhoneNum:
+          $ref: '#/components/schemas/PhoneNum'
+        PostAddr:
+          $ref: '#/components/schemas/PostAddr'
+        Email:
+          $ref: '#/components/schemas/Email'
+        WebAddr:
+          $ref: '#/components/schemas/WebAddr'
+        ContactIdent:
+          type: string
+        ContactName:
+          type: string
+        ContactTitle:
+          type: string
+        DoNotSolicitInd:
+          type: boolean
+      description: see [Contact](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=1303)
+        for indepth description
+    UserDefinedData:
+      required:
+      - UserIdent
+      type: object
+      properties:
+        UserIdent:
+          type: string
+        Value:
+          type: string
+    PositivePay:
+      type: object
+      properties:
+        DeliveryMethod:
+          type: string
+        ToleranceAmt:
+          type: number
+        Contact:
+          $ref: '#/components/schemas/Contact'
+    AcctReconciliation:
+      type: object
+      properties:
+        ReconciliationType:
+          type: string
+        Contact:
+          $ref: '#/components/schemas/Contact'
+        StaleDays:
+          type: integer
+          format: int64
+        DormantDays:
+          type: integer
+          format: int64
+        CombineGroup:
+          type: integer
+          format: int64
+        UserDefinedData:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDefinedData'
+        PositivePay:
+          $ref: '#/components/schemas/PositivePay'
+    InHouseAcctRef:
+      type: object
+      properties:
+        TrnCode:
+          type: string
+        ACHTrnCode:
+          type: string
+        ACHReceivingType:
+          type: string
+        ACHCompanyEntryDesc:
+          type: string
+        SameDayInd:
+          type: boolean
+          nullable: true
+      allOf:
+      - $ref: '#/components/schemas/AcctRef'
+    AcctCDARSData:
+      type: object
+      properties:
+        CDARSType:
+          type: string
+        InHouseAmt:
+          $ref: '#/components/schemas/CurAmt'
+        OrderAmt:
+          $ref: '#/components/schemas/CurAmt'
+        TotalValueAmt:
+          $ref: '#/components/schemas/CurAmt'
+        InHouseAcctRef:
+          $ref: '#/components/schemas/InHouseAcctRef'
+        Term:
+          $ref: '#/components/schemas/Term'
+        Rate:
+          type: number
+        EffectiveRate:
+          type: number
+        IntDispData:
+          $ref: '#/components/schemas/IntDispData'
+        PrincipalDispData:
+          $ref: '#/components/schemas/PrincipalDispData'
+        SourceOfFunds:
+          type: string
+        RetirementPlanType:
+          type: string
+        ContactName:
+          type: string
+    BeneficiaryData:
+      type: object
+      properties:
+        PartyKeys:
+          $ref: '#/components/schemas/PartyKeys'
+        FullName:
+          type: string
+        TaxIdentType:
+          type: string
+        TaxIdent:
+          type: string
+        BirthDt:
+          type: string
+          format: datetime
+        PostAddr:
+          $ref: '#/components/schemas/PostAddr'
+        BeneficiaryLevel:
+          type: string
+        BeneficiaryLevelEnumDesc:
+          type: string
+        BeneficiaryType:
+          type: string
+        BeneficiaryTypeEnumDesc:
+          type: string
+        BeneficiaryDesc:
+          type: string
+        BeneficiaryPercent:
+          type: number
+        BeneficiaryAmt:
+          type: number
+    DepositAcctInfo:
+      type: object
+      properties:
+        NegotiableInstrumentInd:
+          type: boolean
+        AgreedFundingAmt:
+          $ref: '#/components/schemas/CurAmt'
+        IntDispData:
+          $ref: '#/components/schemas/IntDispData'
+        PrincipalDispData:
+          $ref: '#/components/schemas/PrincipalDispData'
+        RetirementAcctData:
+          $ref: '#/components/schemas/RetirementAcctData'
+        ClubPayoffData:
+          $ref: '#/components/schemas/ClubPayoffData'
+        SweepData:
+          $ref: '#/components/schemas/SweepData'
+        OverdraftData:
+          $ref: '#/components/schemas/OverdraftData'
+        ChargeOffCode:
+          type: string
+        ChargeOffCodeEnumDesc:
+          type: string
+        FloatData:
+          type: array
+          items:
+            $ref: '#/components/schemas/FloatData'
+        SvcChgData:
+          $ref: '#/components/schemas/SvcChgData'
+        CommercialAnalysisData:
+          $ref: '#/components/schemas/CommercialAnalysisData'
+        CorrespondingPoolData:
+          $ref: '#/components/schemas/CorrespondingPoolData'
+        FDICOwnership:
+          type: string
+        FDICOwnershipEnumDesc:
+          type: string
+        ChildSupportTrust:
+          type: string
+        ChildSupportTrustEnumDesc:
+          type: string
+        CorrespondentCode:
+          type: string
+        BrokeredDeposit:
+          type: string
+        BrokeredDepositEnumDesc:
+          type: string
+        DepositListingSvc:
+          type: string
+        DepositListingSvcEnumDesc:
+          type: string
+        SourceOfFunds:
+          type: string
+        SourceOfFundsEnumDesc:
+          type: string
+        GovernmentFunds:
+          type: string
+        GovernmentFundsEnumDesc:
+          type: string
+        PublicFunds:
+          type: string
+        PublicFundsEnumDesc:
+          type: string
+        SecuredDeposit:
+          type: string
+        SecuredDepositEnumDesc:
+          type: string
+        TrustDeposit:
+          type: string
+        TrustDepositEnumDesc:
+          type: string
+        EscheatDt:
+          type: string
+          format: datetime
+        RegCCData:
+          $ref: '#/components/schemas/RegCCData'
+        CollateralPledgeCode:
+          type: string
+        CollateralPledgeCodeEnumDesc:
+          type: string
+        HoldUseInstruction:
+          type: string
+        HoldUseInstructionEnumDesc:
+          type: string
+        FloatUseInstruction:
+          type: string
+        FloatUseInstructionEnumDesc:
+          type: string
+        EIM_NSFInstruction:
+          type: string
+        EIM_NSFInstructionEnumDesc:
+          type: string
+        AutoNSFDecision:
+          type: string
+        AutoNSFDecisionEnumDesc:
+          type: string
+        NSFEntry:
+          type: array
+          items:
+            $ref: '#/components/schemas/NSFEntry'
+        HoldInd:
+          type: boolean
+        StopInd:
+          type: boolean
+        BulkFileOption:
+          type: string
+        BulkFileOptionEnumDesc:
+          type: string
+        SignificantBalChgOption:
+          type: string
+        SignificantBalChgOptionEnumDesc:
+          type: string
+        LargeItemOption:
+          type: string
+        LargeItemOptionEnumDesc:
+          type: string
+        CheckNameOption:
+          type: string
+        CheckNameOptionEnumDesc:
+          type: string
+        ISARepairInd:
+          type: boolean
+        CashTrnReportingInd:
+          type: boolean
+        CombinedIntCheckGroup:
+          type: string
+        KitingReportInd:
+          type: boolean
+        ForfeitureCalcMethod:
+          type: string
+        ForfeitureCalcMethodEnumDesc:
+          type: string
+        AcctReconciliation:
+          $ref: '#/components/schemas/AcctReconciliation'
+        AcctCDARSData:
+          $ref: '#/components/schemas/AcctCDARSData'
+        BeneficiaryData:
+          type: array
+          items:
+            $ref: '#/components/schemas/BeneficiaryData'
+      description: DepositAcctInfo
+      allOf:
+      - $ref: '#/components/schemas/AcctInfo'
+    IntPmtFrequency:
+      type: object
+      properties:
+        EndOfQuarterInd:
+          type: boolean
+          nullable: true
+        SeqNum:
+          type: integer
+          format: int64
+        EarningsSchedType:
+          type: string
+        EarningsSchedDateCode:
+          type: string
+        EarningsDt:
+          type: string
+          format: datetime
+      allOf:
+      - $ref: '#/components/schemas/RecurRule'
+    IntDispData:
+      type: object
+      properties:
+        IntDisposition:
+          type: string
+        IntDispositionEnumDesc:
+          type: string
+        IntDistAcctRef:
+          $ref: '#/components/schemas/IntDistAcctRef'
+        CustPayeeId:
+          type: string
+        DistributionAmt:
+          $ref: '#/components/schemas/DistributionAmt'
+        WithholdingOption:
+          type: string
+        WithholdingOptionEnumDesc:
+          type: string
+        PayOnMaturityInd:
+          type: boolean
+        IntPmtFrequency:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntPmtFrequency'
+        NextIntPmtDt:
+          type: string
+          format: datetime
+        NextIntPmtAmt:
+          $ref: '#/components/schemas/CurAmt'
+        LastIntPmtDt:
+          type: string
+          format: datetime
+        ACHNoticeInd:
+          type: boolean
+      description: IntDispData
+    IntDistAcctRef:
+      type: object
+      properties:
+        TrnCode:
+          type: string
+        ACHTrnCode:
+          type: string
+        ACHReceivingType:
+          type: string
+        ACHReceivingCompany:
+          type: string
+        ACHCompanyEntryDesc:
+          type: string
+        SameDayInd:
+          type: boolean
+        ACHStartDt:
+          type: string
+          format: datetime
+          nullable: true
+      allOf:
+      - $ref: '#/components/schemas/AcctRef'
+    DistributionAmt:
+      allOf:
+      - $ref: '#/components/schemas/CurAmt'
+    CurAmt:
+      type: object
+      properties:
+        Amt:
+          type: number
+        CurCode:
+          $ref: '#/components/schemas/CurCode'
+      description: CurAmt
+    CurCode:
+      type: object
+      properties:
+        CurCodeType:
+          type: string
+        CurCodeTypeEnumDesc:
+          type: string
+        CurCodeValue:
+          type: string
+      description: CurCode
+    PrincipalDispData:
+      type: object
+      properties:
+        PrincipalDisposition:
+          type: string
+        PrincipalDispositionEnumDesc:
+          type: string
+        AcctKeys:
+          $ref: '#/components/schemas/AcctKeys'
+      description: PrincipalDispData
+    BaseKeys_Type:
+      type: object
+      description: BaseKeys_Type
+    AcctKeys:
+      type: object
+      properties:
+        AcctId:
+          type: string
+        SubAcctId:
+          type: string
+        AcctType:
+          type: string
+        AcctIdent:
+          $ref: '#/components/schemas/AcctIdent'
+        FIIdentType:
+          type: string
+        FIIdent:
+          type: string
+        BranchIdent:
+          type: string
+        CurCode:
+          $ref: '#/components/schemas/CurCode'
+        CardKeys:
+          $ref: '#/components/schemas/CardKeys'
+      description: AcctKeys
+      allOf:
+      - $ref: '#/components/schemas/BaseKeys_Type'
+    CardKeys:
+      type: object
+      properties:
+        cardId:
+          maxLength: 36
+          type: string
+        cardIdent:
+          $ref: '#/components/schemas/CardIdent'
+        cardNum:
+          maxLength: 32
+          type: string
+        cardSeqNum:
+          maxLength: 3
+          type: string
+        isocode:
+          type: string
+        svcIdent:
+          $ref: '#/components/schemas/SvcIdent'
+    CardIdent:
+      type: object
+      properties:
+        cardIdentType:
+          type: string
+        cardIdentValue:
+          type: string
+    RetirementAcctData:
+      type: object
+      properties:
+        RetirementPlanIdent:
+          type: string
+        RetirementPlanType:
+          type: string
+        RetirementPlanTypeEnumDesc:
+          type: string
+        RetirementStatus:
+          type: string
+        RetirementStatusEnumDesc:
+          type: string
+        BirthDt:
+          type: string
+          format: datetime
+        EmployerIdent:
+          type: string
+        Max5070ContributionAmt:
+          $ref: '#/components/schemas/CurAmt'
+        PriorYrMax5070ContributionAmt:
+          $ref: '#/components/schemas/CurAmt'
+        MaxContributionAmt:
+          $ref: '#/components/schemas/CurAmt'
+        PriorYrMaxContributionAmt:
+          $ref: '#/components/schemas/CurAmt'
+        IncTrnDetailStmtInd:
+          type: boolean
+        InheritedAcctData:
+          $ref: '#/components/schemas/InheritedAcctData'
+        LastRolloverDt:
+          type: string
+          format: datetime
+      description: RetirementAcctData
+    InheritedAcctData:
+      type: object
+      properties:
+        InheritedPlanType:
+          type: string
+        InheritedPlanTypeEnumDesc:
+          type: string
+        PartyKeys:
+          $ref: '#/components/schemas/PartyKeys'
+        BirthDt:
+          type: string
+          format: datetime
+        DeceasedDt:
+          type: string
+          format: datetime
+        Name:
+          type: string
+        OldestBeneficiaryDOBInd:
+          type: boolean
+        OldestBeneficiaryBirthDt:
+          type: string
+          format: datetime
+        LifeExpectancy:
+          type: number
+      description: InheritedAcctData
+    SvcIdent:
+      type: object
+      properties:
+        SvcProviderName:
+          type: string
+        SvcNbr:
+          type: string
+        SvcName:
+          type: string
+    PartyAcctRelInfo:
+      type: object
+      properties:
+        FDICOwnership:
+          type: string
+        FDICOwnershipEnumDesc:
+          type: string
+        FDICOwnershipPrintOption:
+          type: string
+        NamePrintOption:
+          type: string
+        AndorOr:
+          type: string
+        AlternateNameIdent:
+          type: string
+        AlternateFullName:
+          type: string
+        SendNotificationInd:
+          type: boolean
+        DocDistributionOption:
+          type: string
+        StmtType:
+          type: string
+        CreditBureauInd:
+          type: boolean
+        AcctRef:
+          $ref: '#/components/schemas/AcctRef'
+        UpdateContactCode:
+          type: string
+        AutoEnrollmentData:
+          $ref: '#/components/schemas/AutoEnrollmentData'
+      allOf:
+      - $ref: '#/components/schemas/PartyRelInfo'
+    AutoEnrollmentData:
+      type: object
+      properties:
+        AutoEnrollmentType:
+          type: string
+        AutoEnrollmentInd:
+          type: boolean
+    AcctStatusRec:
+      type: object
+      properties:
+        SvcIdent:
+          $ref: '#/components/schemas/SvcIdent'
+        AcctKeys:
+          $ref: '#/components/schemas/AcctKeys'
+        AcctStatus:
+          $ref: '#/components/schemas/AcctStatus'
+    OvrdExceptionData:
+      type: object
+      properties:
+        OverrideException:
+          type: array
+          items:
+            $ref: '#/components/schemas/OverrideException'
+    OverrideException:
+      type: object
+      properties:
+        SubjectRole:
+          type: string
+        SubjectIdent:
+          type: string
+        OvrdExceptionCode:
+          type: string
+        OvrdElement:
+          $ref: '#/components/schemas/OvrdElement'
+    OvrdElement:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/SubjectElement'
+    SubjectElement:
+      type: object
+      properties:
+        Path:
+          type: string
+        ServerPath:
+          type: string
+        Value:
+          type: string
+    PartyRelInfo:
+      type: object
+      properties:
+        PartyRef:
+          $ref: '#/components/schemas/PartyRef'
+        PartyAcctRelData:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartyAcctRelData'
+        OwnerPercent:
+          type: number
+        OwnerInd:
+          type: boolean
+        PrimaryOwnerInd:
+          type: boolean
+        Beneficiary:
+          $ref: '#/components/schemas/Beneficiary'
+        Liability:
+          $ref: '#/components/schemas/Liability'
+        TaxReportingOwnerInd:
+          type: boolean
+        TaxReportingSignerInd:
+          type: boolean
+        Nickname:
+          type: string
+        AddtlAcctType:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddtlAcctType'
+        AcctTitle:
+          type: string
+        Name:
+          type: string
+        AcctRelClass:
+          type: string
+        AcctRelClassEnumDesc:
+          type: string
+        PortHasCreditLineInd:
+          type: boolean
+    Liability:
+      type: object
+      properties:
+        LiabilityPercent:
+          type: number
+        LiabilityAmt:
+          type: number
+    Beneficiary:
+      type: object
+      properties:
+        BeneficiaryPercent:
+          type: number
+        BeneficiaryAmt:
+          type: number
+    AddtlAcctType:
+      type: object
+      properties:
+        AcctTypeSource:
+          type: string
+        AcctTypeValue:
+          type: string
+    PartyAcctRelData:
+      type: object
+      properties:
+        PartyAcctRelType:
+          type: string
+        PartyAcctRelDesc:
+          type: string
+        PartyAcctRelOrder:
+          type: string
+        OwnershipType:
+          type: string
+        OwnershipTypeEnumDesc:
+          type: string
+    PartyRef:
+      type: object
+      properties:
+        PartyKeys:
+          $ref: '#/components/schemas/PartyKeys'
+        PersonPartyListInfo:
+          $ref: '#/components/schemas/PersonPartyListInfo'
+        OrgPartyListInfo:
+          $ref: '#/components/schemas/OrgPartyListInfo'
+    OrgPartyListInfo:
+      type: object
+      properties:
+        OrgName:
+          $ref: '#/components/schemas/OrgName'
+        RecipientGIIN:
+          type: string
+        LegalForm:
+          type: string
+        BeneficialOwnerReqInd:
+          type: boolean
+      allOf:
+      - $ref: '#/components/schemas/PartyListInfo'
+    OrgName:
+      type: object
+      properties:
+        NameType:
+          type: string
+        NameTypeEnumDesc:
+          type: string
+        NameIdent:
+          type: string
+        Name:
+          type: string
+        PreferredName:
+          type: string
+        LegalName:
+          type: string
+        NameFormat:
+          type: string
+        NameFormatEnumDesc:
+          type: string
+        NameInUseInd:
+          type: boolean
+    PersonPartyListInfo:
+      type: object
+      properties:
+        PersonName:
+          $ref: '#/components/schemas/PersonName'
+        BirthDt:
+          type: string
+          format: datetime
+      allOf:
+      - $ref: '#/components/schemas/PartyListInfo'
+    PersonName:
+      type: object
+      properties:
+        NameType:
+          type: string
+        NameTypeEnumDesc:
+          type: string
+        NameIdent:
+          type: string
+        FullName:
+          type: string
+        FamilyName:
+          type: string
+        GivenName:
+          type: string
+        MiddleName:
+          type: string
+        NamePrefix:
+          type: string
+        NameSuffix:
+          type: string
+        PreferredName:
+          type: string
+        LegalName:
+          type: string
+        NameFormat:
+          type: string
+        NameFormatEnumDesc:
+          type: string
+        NameInUseInd:
+          type: boolean
+    PartyListInfo:
+      type: object
+      properties:
+        MemberData:
+          $ref: '#/components/schemas/MemberData'
+        PartySelType:
+          type: string
+        PartyType:
+          type: string
+        PartyTypeEnumDesc:
+          type: string
+        Contact:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        TaxIdentType:
+          type: string
+        TaxIdentTypeEnumDesc:
+          type: string
+        TaxIdent:
+          type: string
+        TaxIdentApplyDt:
+          type: string
+          format: datetime
+        IssuedIdent:
+          type: array
+          items:
+            $ref: '#/components/schemas/IssuedIdent'
+        OEDCode:
+          type: string
+        OEDCodeEnumDesc:
+          type: string
+        EmployeeInd:
+          type: boolean
+        RestrictedInd:
+          type: boolean
+        RestrictedDesc:
+          type: string
+        SecretData:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecretData'
+        OriginatingBranch:
+          type: string
+        OriginatingBranchEnumDesc:
+          type: string
+        ServiceLevel:
+          type: string
+        ServiceLevelEnumDesc:
+          type: string
+        MarketSegment:
+          type: string
+        MarketSegmentEnumDesc:
+          type: string
+        TelebancPswd:
+          type: string
+        SocioEconomicCode:
+          type: string
+        socioEconomicCodeEnumDesc:
+          type: string
+    SecretData:
+      type: object
+      properties:
+        SecretIdent:
+          type: string
+        SecretIdentEnumDesc:
+          type: string
+        SecretValue:
+          type: string
+    IssuedIdent:
+      type: object
+      properties:
+        IssuedIdentType:
+          type: string
+        IssuedIdentTypeEnumDesc:
+          type: string
+        IssuedIdentId:
+          type: string
+        IssuedIdentValue:
+          type: string
+        Issuer:
+          type: string
+        IssuerEnumDesc:
+          type: string
+        IssuerLocation:
+          type: string
+        IssuerLocationEnumDesc:
+          type: string
+        IssueDt:
+          type: string
+        ExpDt:
+          type: string
+          format: datetime
+        IdentVerifyDt:
+          type: string
+          format: datetime
+        NextIdentVerifyDt:
+          type: string
+          format: datetime
+        VerificationDetailText:
+          type: string
+        GovIssuedIdent:
+          $ref: '#/components/schemas/GovIssuedIdent'
+    GovIssuedIdent:
+      type: object
+      properties:
+        CountryCode:
+          $ref: '#/components/schemas/CountryCode'
+        StateProv:
+          type: string
+        StateProvEnumDesc:
+          type: string
+    MemberData:
+      type: object
+      properties:
+        MemberGroup:
+          type: string
+        MemberNum:
+          type: string
+    PartyKeys:
+      type: object
+      properties:
+        SvcIdent:
+          $ref: '#/components/schemas/SvcIdent'
+        PartyId:
+          type: string
+        PartyIdentType:
+          type: string
+        PartyIdent:
+          type: string
+      description: PartyKeys
+    ClubPayoffData:
+      type: object
+      properties:
+        ClubPayoffOption:
+          type: string
+        ClubPayoffOptionEnumDesc:
+          type: string
+        ClubPayoffAcctRef:
+          $ref: '#/components/schemas/ClubPayoffAcctRef'
+        PayoffTimeFrame:
+          $ref: '#/components/schemas/RecurRule'
+      description: ClubPayoffData
+    SweepData:
+      type: object
+      properties:
+        SweepGroupId:
+          type: string
+        SweepBalType:
+          $ref: '#/components/schemas/SweepBalType'
+        SweepBalTypeEnumDesc:
+          type: string
+        MinCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        MaxCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+      description: SweepData
+    SweepBalType:
+      type: string
+      description: SweepBalType
+      enum:
+      - Ledger
+      - Avail
+    OverdraftData:
+      type: object
+      properties:
+        OverdraftEnrollOpt:
+          type: string
+        OverdraftEnrollOptEnumDesc:
+          type: string
+        OverdraftEnrollOptDt:
+          type: string
+          format: datetime
+          nullable: true
+        OverdraftAutoTrnInd:
+          type: boolean
+          nullable: true
+        OverdraftLimitPriority:
+          type: string
+        OverdraftLimitPriorityEnumDesc:
+          type: string
+        BalanceVerification:
+          type: string
+        OverdraftLimitAmt:
+          $ref: '#/components/schemas/CurAmt'
+        OverdraftLimitType:
+          type: string
+        OverdraftLimitTypeEnumDesc:
+          type: string
+        OverdraftLimitReviewOption:
+          type: string
+        OverdraftReviewDt:
+          type: string
+          format: datetime
+          nullable: true
+        OverdraftRatingCode:
+          type: string
+        OverdraftRatingCodeEnumDesc:
+          type: string
+        OverdraftTypeCode:
+          type: string
+        OverdraftTypeCodeEnumDesc:
+          type: string
+        OverdraftNotificationOpt:
+          type: string
+        OverdraftNotificationOptEnumDesc:
+          type: string
+        ContactType:
+          type: string
+        ContactTypeEnumDesc:
+          type: string
+        WaiveOverdraftInd:
+          type: boolean
+          nullable: true
+        AtmPosOverdraft:
+          $ref: '#/components/schemas/AtmPosOverdraft'
+      description: OverdraftData
+    AtmPosOverdraft:
+      type: object
+      properties:
+        AuthLimitOption:
+          type: string
+        AuthLimitOptionEnumDesc:
+          type: string
+        OptInOutDt:
+          type: string
+          format: datetime
+          nullable: true
+        AuthLimitAmt:
+          $ref: '#/components/schemas/CurAmt'
+        NoticeOption:
+          type: string
+        NoticeOptionEnumDesc:
+          type: string
+      description: AtmPosOverdraft
+    AcctPref:
+      type: object
+      properties:
+        Language:
+          type: string
+        LanguageEnumDesc:
+          type: string
+        CurCode:
+          $ref: '#/components/schemas/CurCode'
+    InitialAmount:
+      type: object
+      description: see [InitialAmount](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=853)
+        for indepth description
+      allOf:
+      - $ref: '#/components/schemas/CurAmt'
+    BalanceAtClosingAmt:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CurAmt'
+    FeeCollectedAmt:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CurAmt'
+    Term:
+      required:
+      - TermUnits
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int64
+        TermUnits:
+          type: string
+        TermUnitsEnumDesc:
+          type: string
+      description: see [Term](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=281)
+        for indepth description
+    DateData:
+      type: object
+      properties:
+        DateType:
+          type: string
+        DateTypeEnumDesc:
+          type: string
+        DateValue:
+          type: string
+          format: datetime
+          nullable: true
+        RefData:
+          type: array
+          items:
+            $ref: '#/components/schemas/RefData'
+    RefData:
+      type: object
+      properties:
+        RefType:
+          type: string
+        RefIdent:
+          type: string
+        RefTypeEnumDesc:
+          type: string
+        RefDesc:
+          type: string
+      description: see [RefData](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=1762)
+        for indepth description
+    RelationshipMgr:
+      type: object
+      properties:
+        RelationshipMgrIdent:
+          type: string
+        RelationshipMgrIdentEnumDesc:
+          type: string
+        RelationshipRole:
+          type: string
+        RelationshipRoleEnumDesc:
+          type: string
+      description: see [RelationshipMgr](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=4688)
+        for indepth description
+    AddtlTitles:
+      type: object
+      properties:
+        AcctTitleType:
+          type: string
+        AcctTitle:
+          type: string
+        AcctTitleOption:
+          type: string
+        DBAInd:
+          type: boolean
+          nullable: true
+        AcctTitleOptionEnumDesc:
+          type: string
+    ClientDefinedData:
+      type: object
+      properties:
+        DataClassType:
+          type: string
+        DataClassTypeEnumDesc:
+          type: string
+        DataIdent:
+          type: string
+        DataIdentEnumDesc:
+          type: string
+        DataType:
+          type: string
+        DataTypeEnumDesc:
+          type: string
+        Value:
+          type: string
+        ValueEnumDesc:
+          type: string
+        DataLength:
+          type: integer
+          format: int64
+        ExpDt:
+          type: string
+          format: datetime
+        Desc:
+          type: string
+        RequiredFlag:
+          type: boolean
+          nullable: true
+        SearchFlag:
+          type: boolean
+          nullable: true
+        GroupNum:
+          type: string
+        RestrictedInd:
+          type: boolean
+          nullable: true
+        RestrictedDesc:
+          type: string
+    NoticeData:
+      type: object
+      properties:
+        NoticeType:
+          type: string
+        NoticeTypeEnumDesc:
+          type: string
+        NoticeOption:
+          type: string
+        NoticeOptionEnumDesc:
+          type: string
+        NoticeFormat:
+          type: string
+        HandlingCode:
+          type: string
+        LeadDays:
+          type: integer
+          format: int64
+        NoticeRemarks:
+          type: string
+        GenLastUpDtInd:
+          type: boolean
+          nullable: true
+    RecurRule:
+      type: object
+      properties:
+        RecurType:
+          type: string
+        RecurInterval:
+          type: integer
+          format: int64
+        RecurTypeEnumDesc:
+          type: string
+        RecurInstance:
+          type: integer
+          format: int64
+        DayOfWeek:
+          type: string
+        DayOfMonth:
+          type: string
+        SecondDayOfMonth:
+          type: string
+        Month:
+          type: integer
+          format: int64
+        RecurStartDate:
+          type: string
+          format: datetime
+        Occurrences:
+          type: integer
+          format: int64
+        RecurEndDate:
+          type: string
+          format: datetime
+        AdjDays:
+          type: integer
+          format: int64
+        LeadDays:
+          type: integer
+          format: int64
+        AdjDaysBasis:
+          type: string
+        WeekendOption:
+          type: string
+        WeekendOptionEnumDesc:
+          type: string
+      description: see [RecurRule](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=6449)
+        for indepth description
+    StmtTimeFrame:
+      type: object
+      properties:
+        AlternateStmtInd:
+          type: boolean
+          nullable: true
+        AlternateStmtOption:
+          type: string
+      description: see [StmtTimeFrame](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=4772)
+        for indepth description
+      allOf:
+      - $ref: '#/components/schemas/RecurRule'
+    StmtDisclosureData:
+      type: object
+      properties:
+        StmtDisclosureType:
+          type: string
+        StmtDisclosureTypeEnumDesc:
+          type: string
+        StmtDisclosureInd:
+          type: boolean
+          nullable: true
+    StmtOptions:
+      type: object
+      properties:
+        StmtOptionType:
+          type: string
+        StmtOptionValue:
+          type: string
+    AcctStmtData:
+      type: object
+      properties:
+        StmtTimeFrame:
+          type: array
+          items:
+            $ref: '#/components/schemas/StmtTimeFrame'
+        NextStmtDt:
+          type: string
+          format: datetime
+        LastStmtDt:
+          type: string
+          format: datetime
+        StmtPrepCode:
+          type: string
+        StmtPrepCodeEnumDesc:
+          type: string
+        CombinedStmtIdent:
+          type: string
+        UseSharedAcctForCombinedStmt:
+          type: boolean
+          nullable: true
+        CombinedStmtCode:
+          type: string
+        CombinedStmtCodeEnumDesc:
+          type: string
+        AdditionalStmtCount:
+          type: string
+        SpecialStmtCode:
+          type: string
+        SpecialStmtCodeEnumDesc:
+          type: string
+        StmtFormat:
+          type: string
+        StmtFormatEnumDesc:
+          type: string
+        AnalysisStmtFormat:
+          type: string
+        AnalysisStmtFormatEnumDesc:
+          type: string
+        StmtTruncationOption:
+          type: string
+        StmtTruncationOptionEnumDesc:
+          type: string
+        MailCode:
+          type: string
+        MailCodeEnumDesc:
+          type: string
+        StmtRemarks:
+          type: string
+        NoActivityStmtOption:
+          type: string
+        NoActivityStmtOptionEnumDesc:
+          type: string
+        PrintRegEStmt:
+          type: string
+        PrintRegEStmtEnumDesc:
+          type: string
+        RegDDAPYCode:
+          type: string
+        RegDDAPYCodeEnumDesc:
+          type: string
+        StmtDisclosureData:
+          $ref: '#/components/schemas/StmtDisclosureData'
+        StmtGroup:
+          type: string
+        StmtOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/StmtOptions'
+    LowCurAmt:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CurAmt'
+    HighCurAmt:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/CurAmt'
+    RateMatrixTier:
+      type: object
+      properties:
+        Tier:
+          maxLength: 32
+          type: string
+        LowCurAmt:
+          $ref: '#/components/schemas/LowCurAmt'
+        HighCurAmt:
+          $ref: '#/components/schemas/HighCurAmt'
+        Term:
+          $ref: '#/components/schemas/Term'
+        Rate:
+          type: number
+        RateIndex:
+          type: integer
+          format: int64
+        RateIndexEnumDesc:
+          type: string
+        MarginType:
+          type: string
+        MarginTypeEnumDesc:
+          type: string
+        Margin:
+          type: number
+        EffDt:
+          type: string
+          format: datetime
+          nullable: true
+        IntAPY:
+          type: number
+        LowIntAPY:
+          type: number
+        HighIntAPY:
+          type: number
+        IntAPR:
+          type: number
+      description: see [RateMatrixTier](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=9525)
+        for indepth description
+    AccrualFrequency:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/RecurRule'
+    CapFrequency:
+      type: object
+      description: see [CapFrequency](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=9515)
+        for indepth description
+      allOf:
+      - $ref: '#/components/schemas/RecurRule'
+    BalCutOffData:
+      type: object
+      properties:
+        BalCutOffType:
+          type: string
+        BalCutOffTypeEnumDesc:
+          type: string
+        BalCutOffAmt:
+          type: number
+    SplitRateData:
+      type: object
+      properties:
+        SplitAmt:
+          type: integer
+          format: int64
+        OverRate:
+          type: number
+        UnderRate:
+          type: number
+    IntRateData:
+      type: object
+      properties:
+        RateMatrixTier:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateMatrixTier'
+        BasedOnCode:
+          type: string
+        BasedOnCodeEnumDesc:
+          type: string
+        BasedOnValue:
+          type: number
+        AccrualFrequency:
+          $ref: '#/components/schemas/AccrualFrequency'
+        APYRecurType:
+          type: string
+        AccrualMethod:
+          type: string
+        AccrualMethodEnumDesc:
+          type: string
+        AccrualCode:
+          type: string
+        AccrualCodeEnumDesc:
+          type: string
+        AccrualOnBalance:
+          type: string
+        AccrualOnBalanceEnumDesc:
+          type: string
+        DailyAccrual:
+          type: string
+        DailyAccrualEnumDesc:
+          type: string
+        DailyAccrualFactor:
+          type: number
+        MinimumInterest:
+          type: number
+        CapFrequency:
+          $ref: '#/components/schemas/CapFrequency'
+        CompoundInd:
+          type: boolean
+          nullable: true
+        EffDt:
+          type: string
+          format: datetime
+          nullable: true
+        ExpDt:
+          type: string
+          format: datetime
+          nullable: true
+        TierType:
+          type: string
+        TierTypeEnumDesc:
+          type: string
+        TierAmtType:
+          type: string
+        TierAmtTypeEnumDesc:
+          type: string
+        BalCutOffData:
+          $ref: '#/components/schemas/BalCutOffData'
+        SplitRateData:
+          $ref: '#/components/schemas/SplitRateData'
+        IntRateCalcOption:
+          type: string
+      description: see [IntRateData](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=1744)
+        for indepth description
+    MaturityIntCalcData:
+      type: object
+      properties:
+        MaturityIntRateType:
+          type: string
+        MaturityIntRateTypeEnumDesc:
+          type: string
+        MaturityIntRate:
+          type: number
+        MaturityIntRecurType:
+          type: string
+        MaturityIntRecurTypeEnumDesc:
+          type: string
+        MaturityIntInterval:
+          type: integer
+          format: int64
+    PromotionalRate:
+      type: object
+      properties:
+        PromotionalRateInd:
+          type: boolean
+          nullable: true
+        StartDt:
+          type: string
+          format: datetime
+        EndDt:
+          type: string
+          format: datetime
+        PromoDays:
+          type: integer
+          format: int64
+        MarginType:
+          type: string
+        MarginTypeEnumDesc:
+          type: string
+        Margin:
+          type: number
+    StepRateType:
+      type: object
+      properties:
+        Step:
+          type: string
+        Rate:
+          type: number
+    PendingRate:
+      type: object
+      properties:
+        BasedOnValue:
+          type: number
+        Rate:
+          type: number
+        EffDt:
+          type: string
+          format: datetime
+          nullable: true
+    RateChangeRangeMaxMin:
+      type: object
+      properties:
+        RateChangeRange:
+          type: string
+        MinRateChange:
+          type: number
+        MaxRateChange:
+          type: number
+    RateChangeData:
+      type: object
+      properties:
+        ReviewPlanIdent:
+          type: string
+        RateChangeControl:
+          type: string
+        RateChangeControlEnumDesc:
+          type: string
+        RateCalcMethod:
+          type: string
+        RateCalcMethodEnumDesc:
+          type: string
+        RatePricingMethod:
+          type: string
+        RatePricingMethodEnumDesc:
+          type: string
+        RatePricingTable:
+          type: string
+        RatePricingTableEnumDesc:
+          type: string
+        StepRateType:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepRateType'
+        RateChangeNbr:
+          type: integer
+          format: int64
+        RateChangeIntervalOption:
+          type: string
+        BasedOnCode:
+          type: string
+        BasedOnCodeEnumDesc:
+          type: string
+        BasedOnValue:
+          type: number
+        VarianceFactorType:
+          type: string
+        VarianceFactorTypeEnumDesc:
+          type: string
+        RateFactor:
+          type: number
+        RateVariance:
+          type: number
+        PendingRate:
+          type: array
+          items:
+            $ref: '#/components/schemas/PendingRate'
+        ExpDt:
+          type: string
+          format: datetime
+        IncreaseOnlyInd:
+          type: boolean
+        UseFloorCeilingRateInd:
+          type: boolean
+        FloorRate:
+          type: number
+        CeilingRate:
+          type: number
+        MinRateChange:
+          type: number
+        MaxRateChange:
+          type: number
+        RateChangeRangeMaxMin:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateChangeRangeMaxMin'
+        MinRateDecreaseLife:
+          type: number
+        MaxRateIncreaseLife:
+          type: number
+        RoundingOption:
+          type: string
+        RoundingOptionEnumDesc:
+          type: string
+        RoundingFactor:
+          type: number
+        RateCarryOverOption:
+          type: string
+        RateCarryOverOptionEnumDesc:
+          type: string
+        RateCarryOver:
+          type: number
+        FixedRateConversionDt:
+          type: string
+          format: datetime
+        FixedRateLeadDays:
+          type: integer
+          format: int64
+        RateChangeRecurType:
+          type: string
+        RateChangeRecurTypeEnumDesc:
+          type: string
+        RecurInterval:
+          type: integer
+          format: int64
+        DayOfMonth:
+          type: string
+        Month:
+          type: integer
+          format: int64
+        LeadDays:
+          type: integer
+          format: int64
+        LeadDaysOption:
+          type: string
+        RecurStartDate:
+          type: string
+          format: datetime
+        Occurrences:
+          type: integer
+          format: int64
+        RecurEndDate:
+          type: string
+          format: datetime
+        NextRateChangeDt:
+          type: string
+          format: datetime
+        LastRateChangeDt:
+          type: string
+          format: datetime
+        PriorRate:
+          type: number
+        TeaserRateInd:
+          type: boolean
+          nullable: true
+        TeaserRateExpDt:
+          type: string
+          format: datetime
+        NoticeDtlOption:
+          type: string
+        NoticeDtlOptionEnumDesc:
+          type: string
+    TotalInPeriod:
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int64
+        Units:
+          type: string
+        UnitsEnumDesc:
+          type: string
+    InPeriod:
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int64
+        Units:
+          type: string
+        UnitsEnumDesc:
+          type: string
+    AcctPeriodData:
+      type: object
+      properties:
+        AcctAmtType:
+          type: string
+        AmtSeqId:
+          type: string
+        AcctAmtTypeEnumDesc:
+          type: string
+        AcctPeriodType:
+          type: string
+        AcctPeriodTypeEnumDesc:
+          type: string
+        TotalInPeriod:
+          $ref: '#/components/schemas/TotalInPeriod'
+        InPeriod:
+          $ref: '#/components/schemas/InPeriod'
+        LastOccurInd:
+          type: boolean
+          nullable: true
+        ExpDt:
+          type: string
+          format: datetime
+        Amt:
+          type: number
+        Count:
+          type: integer
+          format: int64
+        Rate:
+          type: number
+        LastOccuranceDt:
+          type: string
+          format: datetime
+        FirstOccuranceDt:
+          type: string
+          format: datetime
+      description: see [AcctPeriodData](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=4689)
+        for indepth description
+    TranCounter:
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int64
+        TranCounterType:
+          type: string
+    Locator:
+      type: object
+    LabelAddr:
+      type: object
+      properties:
+        Addr1:
+          type: string
+        Addr2:
+          type: string
+        Addr3:
+          type: string
+        Addr4:
+          type: string
+        Addr5:
+          type: string
+        Addr6:
+          type: string
+    AddrDefinedData:
+      type: object
+      properties:
+        DataIdent:
+          type: string
+        Value:
+          type: string
+    StartDayMonth:
+      type: object
+      properties:
+        DayOfMonth:
+          type: string
+        Month:
+          type: integer
+          format: int64
+    Duration:
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int64
+        Unit:
+          type: string
+        UnitEnumDesc:
+          type: string
+    TimeFrame:
+      type: object
+      properties:
+        StartDt:
+          type: string
+          format: datetime
+        StartDayMonth:
+          $ref: '#/components/schemas/StartDayMonth'
+        EndDt:
+          type: string
+          format: datetime
+        EndDayMonth:
+          $ref: '#/components/schemas/StartDayMonth'
+        Duration:
+          $ref: '#/components/schemas/Duration'
+        RecurRule:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecurRule'
+    CountryCode:
+      type: object
+      properties:
+        CountryCodeSource:
+          type: string
+        CountryCodeValue:
+          type: string
+        CountryCodeValueEnumDesc:
+          type: string
+    PhoneNum:
+      type: object
+      properties:
+        PhoneType:
+          type: string
+        PhoneTypeEnumDesc:
+          type: string
+        PhoneIdent:
+          type: integer
+          format: int64
+        Phone:
+          type: string
+        PhoneExchange:
+          type: string
+        PreferredPhone:
+          type: boolean
+          nullable: true
+        Priority:
+          type: string
+        DoNotContactInd:
+          type: boolean
+          nullable: true
+        PhoneDesc:
+          type: string
+        CountryCode:
+          $ref: '#/components/schemas/CountryCode'
+        UpDt:
+          type: string
+          format: datetime
+      description: see [PhoneNum](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=1474)
+        for indepth description
+      allOf:
+      - $ref: '#/components/schemas/Locator'
+    PostAddr:
+      type: object
+      properties:
+        OpenDt:
+          type: string
+          format: datetime
+        RelationshipMgr:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipMgr'
+        OriginatingBranch:
+          type: string
+        OriginatingBranchEnumDesc:
+          type: string
+        PreferredBranch:
+          type: string
+        PreferredBranchEnumDesc:
+          type: string
+        ResponsibleBranch:
+          type: string
+        ResponsibleBranchEnumDesc:
+          type: string
+        NameIdent:
+          type: array
+          items:
+            type: string
+        AddressIdent:
+          type: string
+        AddrUse:
+          type: string
+        AddrUseEnumDesc:
+          type: string
+        AddrFormatType:
+          type: string
+        AddrFormatTypeEnumDesc:
+          type: string
+        FullName1:
+          type: string
+        FullName2:
+          type: string
+        FullName3:
+          type: string
+        Addr1:
+          type: string
+        Addr2:
+          type: string
+        Addr3:
+          type: string
+        Addr4:
+          type: string
+        Addr5:
+          type: string
+        Addr6:
+          type: string
+        ApartmentNum:
+          type: string
+        ApartmentNumType:
+          type: string
+        HouseNum:
+          type: string
+        Street:
+          type: string
+        LabelAddr:
+          $ref: '#/components/schemas/LabelAddr'
+        AddrDefinedData:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddrDefinedData'
+        HouseName:
+          type: string
+        City:
+          type: string
+        County:
+          type: string
+        District:
+          type: string
+        StateProv:
+          type: string
+        StateProvEnumDesc:
+          type: string
+        MilitaryRegion:
+          type: string
+        PostalCode:
+          type: string
+        Country:
+          type: string
+        POBox:
+          type: string
+        AddrType:
+          type: string
+        AddrTypeEnumDesc:
+          type: string
+        AddrLocation:
+          type: string
+        AddrLocationEnumDesc:
+          type: string
+        TimeFrame:
+          $ref: '#/components/schemas/TimeFrame'
+        CountryCode:
+          $ref: '#/components/schemas/CountryCode'
+        ExpDt:
+          type: string
+          format: datetime
+        Retention:
+          type: boolean
+        RevertToPartyAddr:
+          type: boolean
+        MoveInDt:
+          type: string
+          format: datetime
+        ContactMethod:
+          type: string
+        UpDt:
+          type: string
+          format: datetime
+        Comment:
+          type: string
+        CensusTract:
+          type: string
+        CensusBlock:
+          type: string
+        ForeignFlag:
+          type: boolean
+        HandlingCode:
+          type: string
+        HandlingCodeEnumDesc:
+          type: string
+        HandlingCodeOption:
+          type: string
+        HandlingCodeOptionEnumDesc:
+          type: string
+        MSACode:
+          type: integer
+          format: int64
+        MSACodeEnumDesc:
+          type: string
+        MaintDt:
+          type: string
+          format: datetime
+        MaintBy:
+          type: string
+        MaintByEnumDesc:
+          type: string
+        AddrInUseInd:
+          type: boolean
+        PhoneNum:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneNum'
+        IncAddrFormat:
+          type: boolean
+      description: see [PostAddr](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=1675)
+        for indepth description
+      allOf:
+      - $ref: '#/components/schemas/Locator'
+    TaxData:
+      type: object
+      properties:
+        Org:
+          type: string
+        TaxType:
+          type: string
+        TaxTypeEnumDesc:
+          type: string
+        CurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        Rate:
+          type: number
+        WaiveTaxInd:
+          type: boolean
+    TaxWithheldData:
+      type: object
+      properties:
+        TaxYear:
+          type: integer
+          format: int64
+        TaxData:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxData'
+        TaxIdent:
+          type: string
+    USATaxIdCert:
+      type: object
+      properties:
+        USATaxIdCertCode:
+          type: string
+        USATaxIdCertCodeEnumDesc:
+          type: string
+        USATaxIdCertDate:
+          type: string
+          format: datetime
+    WithholdingData:
+      type: object
+      properties:
+        WithholdingType:
+          type: string
+        WithholdingTypeEnumDesc:
+          type: string
+        WithholdingPercent:
+          type: string
+        WithholdingCode:
+          type: string
+        WithholdingCodeEnumDesc:
+          type: string
+    ReportAmt:
+      type: object
+      properties:
+        ReportAmtType:
+          type: string
+        CurAmt:
+          $ref: '#/components/schemas/CurAmt'
+    IntReporting1099Data:
+      type: object
+      properties:
+        IRSReportOption:
+          type: string
+        DischargeEventCode:
+          type: string
+        EventDt:
+          type: string
+          format: datetime
+        LiabilityInd:
+          type: boolean
+        ReportAmt:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportAmt'
+        AcquisitionDt:
+          type: string
+          format: datetime
+        DebtDesc:
+          type: string
+        PropertyDesc:
+          type: string
+    FeeTier:
+      type: object
+      properties:
+        Tier:
+          type: string
+        LowCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        HighCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        CurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        BalPercent:
+          type: number
+    FeeEarningData:
+      type: object
+      properties:
+        EarningMethod:
+          type: string
+        EarningMethodEnumDesc:
+          type: string
+        EffDt:
+          type: string
+          format: datetime
+        ExpDt:
+          type: string
+          format: datetime
+        Term:
+          $ref: '#/components/schemas/Term'
+        Rate:
+          type: number
+        FinancialChargeInd:
+          type: boolean
+          nullable: true
+    EarlyPayoffTierData:
+      type: object
+      properties:
+        TierIdent:
+          type: string
+        TierIntervalCount:
+          type: integer
+          format: int64
+        CurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        BalPercent:
+          type: number
+    EarlyPayoffTable:
+      type: object
+      properties:
+        EarlyPayoffTierType:
+          type: string
+        EarlyPayoffTierNum:
+          type: integer
+          format: int64
+        EarlyPayoffTierData:
+          type: array
+          items:
+            $ref: '#/components/schemas/EarlyPayoffTierData'
+    FeeWaiver:
+      type: object
+      properties:
+        WaiverReasonCode:
+          type: string
+        WaiverReason:
+          type: string
+        WaiverCode:
+          type: string
+        WaiverCodeEnumDesc:
+          type: string
+      description: see [FeeWaiver](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=10068)
+        for indepth description
+    Fee:
+      type: object
+      properties:
+        FeeIdent:
+          type: string
+        ChargeFeeInd:
+          type: boolean
+          nullable: true
+        OvrdFeeDefaultsInd:
+          type: boolean
+          nullable: true
+        FeePlan:
+          type: string
+        Desc:
+          type: string
+        FeeType:
+          type: string
+        FeeTypeEnumDesc:
+          type: string
+        FeeOption:
+          type: string
+        FeeOptionEnumDesc:
+          type: string
+        FeePriorityOption:
+          type: string
+        FeeCalcOption:
+          type: string
+        FeeCalcOptionEnumDesc:
+          type: string
+        FeeCalcBal:
+          type: string
+        FeeCalcBalEnumDesc:
+          type: string
+        FeeAggregationOption:
+          type: string
+        FeeAggregationOptionEnumDesc:
+          type: string
+        PrePayMaxAmt:
+          $ref: '#/components/schemas/CurAmt'
+        PrePayBalPercent:
+          type: number
+        FeeBillingOption:
+          type: string
+        FeeBillingOptionEnumDesc:
+          type: string
+        CurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        BalPercent:
+          type: number
+        FeeTier:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeeTier'
+        FeeCalcProgram:
+          type: string
+        MinCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        MaxCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        DailyAccrual:
+          type: string
+        DailyAccrualEnumDesc:
+          type: string
+        NoticeCode:
+          type: string
+        NoticeCodeEnumDesc:
+          type: string
+        NextFeeDt:
+          type: string
+          format: datetime
+        LastFeeDt:
+          type: string
+          format: datetime
+        TimeFrame:
+          $ref: '#/components/schemas/TimeFrame'
+        FeeEarningData:
+          $ref: '#/components/schemas/FeeEarningData'
+        EarlyPayoffInd:
+          type: boolean
+          nullable: true
+        EarlyPayoffMonthOption:
+          type: string
+        EarlyPayoffMonths:
+          type: integer
+          format: int64
+        EarlyPayoffTable:
+          $ref: '#/components/schemas/EarlyPayoffTable'
+        RefData:
+          $ref: '#/components/schemas/RefData'
+        WaiveFeeInd:
+          type: boolean
+          nullable: true
+        FeeWaiver:
+          $ref: '#/components/schemas/FeeWaiver'
+        Company:
+          type: string
+        FaceValueAmt:
+          $ref: '#/components/schemas/CurAmt'
+        ReportingOptionCode:
+          type: string
+        FeeCollectedAmt:
+          $ref: '#/components/schemas/CurAmt'
+    CreditRisk:
+      type: object
+      properties:
+        SeqNum:
+          type: integer
+          format: int64
+        RiskCategory:
+          type: string
+        RiskCategoryEnumDesc:
+          type: string
+        InternalScore:
+          type: string
+        InternalScoreEnumDesc:
+          type: string
+        ScoreGeneratedDt:
+          type: string
+          format: datetime
+        LoanAmt:
+          $ref: '#/components/schemas/CurAmt'
+        LoanPct:
+          type: number
+        CreditReportType:
+          type: string
+        CreditReportStatus:
+          type: string
+        CreditReportOutcome:
+          type: string
+    RelationshipPricingAcctData:
+      type: object
+      properties:
+        RelationshipPricingRateOpt:
+          type: string
+    CashMgmtRelData:
+      type: object
+      properties:
+        CashMgmtRelType:
+          type: string
+        CashMgmtRelTypeEnumDesc:
+          type: string
+        NumAcctsInRelationship:
+          type: string
+        ZBAInd:
+          type: boolean
+          nullable: true
+        SweepAcctKeys:
+          $ref: '#/components/schemas/AcctKeys'
+        MasterAcctKeys:
+          $ref: '#/components/schemas/AcctKeys'
+        LinkAcctKeys:
+          $ref: '#/components/schemas/AcctKeys'
+    Reminder:
+      type: object
+      properties:
+        ReminderCategory:
+          type: string
+        ReminderCategoryEnumDesc:
+          type: string
+        ReminderInd:
+          type: boolean
+          nullable: true
+    AcctMemoData:
+      type: object
+      properties:
+        AcctMemoIdent:
+          type: string
+        AcctMemoType:
+          type: string
+        AcctMemoCode:
+          type: string
+        AcctMemoText:
+          type: string
+        ExpDt:
+          type: string
+          format: datetime
+    RenewalData:
+      type: object
+      properties:
+        TimesRenewedNum:
+          type: integer
+          format: int64
+        OrigIssueDt:
+          type: string
+          format: datetime
+        OrigMatDt:
+          type: string
+          format: datetime
+        OrigIssueRate:
+          type: number
+        RenewalOption:
+          type: string
+        NextRenewalDateOption:
+          type: string
+        GraceDays:
+          type: integer
+          format: int64
+        RenewalTermCode:
+          type: string
+        RenewalOptionEnumDesc:
+          type: string
+        NextEarningDateOption:
+          type: string
+        RenewalFrequency:
+          $ref: '#/components/schemas/RecurRule'
+        LastRenewalDt:
+          type: string
+          format: datetime
+        ProdIntRateId:
+          type: string
+        RenewalProductIdent:
+          type: string
+        RenewalRate:
+          type: number
+        RateVariance:
+          type: number
+    AgreementData:
+      type: object
+      properties:
+        AgreementType:
+          type: string
+        AgreementIdent:
+          type: string
+        PartyKeys:
+          $ref: '#/components/schemas/PartyKeys'
+    AccessLevelData:
+      type: object
+      properties:
+        AccessLevelType:
+          type: string
+        AccessLevelCode:
+          type: string
+    RewardsData:
+      type: object
+      properties:
+        RewardType:
+          type: string
+        RewardDispositionType:
+          type: string
+        RewardAcct:
+          $ref: '#/components/schemas/AcctKeys'
+        PromoPeriods:
+          type: integer
+          format: int64
+    CheckCreditData:
+      type: object
+      properties:
+        AcctKeys:
+          $ref: '#/components/schemas/AcctKeys'
+        IncrementalAdvAmt:
+          type: number
+        IncrementalAdvOption:
+          type: string
+    OriginationFee:
+      type: object
+      properties:
+        FeeIdent:
+          type: string
+        Desc:
+          type: string
+        FeeOptionInd:
+          type: boolean
+          nullable: true
+        FeeDeferralInd:
+          type: boolean
+          nullable: true
+        FeeReportableInd:
+          type: boolean
+          nullable: true
+        FeeAPRCalcInd:
+          type: boolean
+          nullable: true
+        CurAmt:
+          $ref: '#/components/schemas/CurAmt'
+    LoanReviewData:
+      type: object
+      properties:
+        ReviewFrequency:
+          $ref: '#/components/schemas/RecurRule'
+        RelationshipMgr:
+          $ref: '#/components/schemas/RelationshipMgr'
+        LastReviewDt:
+          type: string
+          format: datetime
+        NextReviewDt:
+          type: string
+          format: datetime
+    DeferredFeeData:
+      type: object
+      properties:
+        Amt:
+          type: number
+        PriorEarningAmt:
+          type: number
+        Rate:
+          type: number
+    FeeCostData:
+      type: object
+      properties:
+        Amt:
+          type: number
+        PriorCostAmt:
+          type: number
+        Rate:
+          type: number
+    DeferredFee:
+      type: object
+      properties:
+        FeeIdent:
+          type: string
+        Desc:
+          type: string
+        EffDt:
+          type: string
+          format: datetime
+        EarningMethod:
+          type: string
+        EarningMethodEnumDesc:
+          type: string
+        Term:
+          $ref: '#/components/schemas/Term'
+        ExpDt:
+          type: string
+          format: datetime
+          nullable: true
+        DeferredLoanBalance:
+          type: number
+        DeferredFeeData:
+          $ref: '#/components/schemas/DeferredFeeData'
+        FeeCostData:
+          $ref: '#/components/schemas/FeeCostData'
+    LoanReportingCodes:
+      required:
+      - ReportingCode
+      type: object
+      properties:
+        ReportingType:
+          type: string
+        ReportingCode:
+          type: string
+        ReportingCodeEnumDesc:
+          type: string
+    NegativeAmortData:
+      type: object
+      properties:
+        MaxLoanPercent:
+          type: number
+        PaymentCap:
+          type: number
+        FullyReamortizationTerm:
+          type: integer
+          format: int64
+        ReamortizationInterval:
+          type: integer
+          format: int64
+        DaysToRespond:
+          type: integer
+          format: int64
+        NextFullyReamortizationDt:
+          type: string
+          format: datetime
+          nullable: true
+    InsuredPerson:
+      type: object
+      properties:
+        PartyKeys:
+          $ref: '#/components/schemas/PartyKeys'
+        TaxIdent:
+          type: string
+    Insurance:
+      type: object
+      properties:
+        InsuranceIdent:
+          type: string
+        ProductIdent:
+          type: string
+        InsuranceType:
+          type: string
+        InsuranceTypeEnumDesc:
+          type: string
+        PrimaryInsuredPerson:
+          $ref: '#/components/schemas/InsuredPerson'
+        SecondaryInsuredPerson:
+          $ref: '#/components/schemas/InsuredPerson'
+        InsuranceCompany:
+          type: string
+        InsuranceCalcOption:
+          type: string
+        InsuranceCalcOptionEnumDesc:
+          type: string
+        InsurancePolicyType:
+          type: string
+        InsurancePolicyTypeEnumDesc:
+          type: string
+        RatePlan:
+          type: integer
+          format: int64
+        SingleRate:
+          type: number
+        JointRate:
+          type: number
+        OvrdRateInd:
+          type: boolean
+          nullable: true
+        OvrdRate:
+          type: number
+        Term:
+          $ref: '#/components/schemas/Term'
+        InsuranceStartDt:
+          type: string
+          format: datetime
+          nullable: true
+        InsuranceExpDt:
+          type: string
+          format: datetime
+          nullable: true
+        FixedPremiumAmt:
+          $ref: '#/components/schemas/CurAmt'
+        PrepaidInsuranceAmt:
+          $ref: '#/components/schemas/CurAmt'
+        MaxCoverageAmt:
+          $ref: '#/components/schemas/CurAmt'
+    SinglePremiumInsurance:
+      type: object
+      properties:
+        InsuranceIdent:
+          type: string
+        ProductIdent:
+          type: string
+        InsuranceType:
+          type: string
+        InsuranceTypeEnumDesc:
+          type: string
+        InsuranceCompany:
+          type: string
+        InsuranceStartDt:
+          type: string
+          format: datetime
+          nullable: true
+        InsuranceExpDt:
+          type: string
+          format: datetime
+          nullable: true
+        FixedPremiumAmt:
+          $ref: '#/components/schemas/CurAmt'
+    BalloonTerm:
+      required:
+      - TermUnits
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int64
+        TermUnits:
+          type: string
+    RecurModel:
+      type: object
+      properties:
+        RecurRule:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecurRule'
+    InterestBilling:
+      type: object
+      properties:
+        RecurModel:
+          $ref: '#/components/schemas/RecurModel'
+        NextPmtDt:
+          type: string
+          format: datetime
+          nullable: true
+        CurAmt:
+          $ref: '#/components/schemas/CurAmt'
+    FromAcctKeys:
+      type: object
+      properties:
+        TrnCode:
+          type: string
+        ACHTrnCode:
+          type: string
+        ACHReceivingType:
+          type: string
+        ACHReceivingCompany:
+          type: string
+        ACHCompanyEntryDesc:
+          type: string
+        SameDayInd:
+          type: boolean
+          nullable: false
+        ACHStartDt:
+          type: string
+          format: datetime
+          nullable: true
+      allOf:
+      - $ref: '#/components/schemas/AcctKeys'
+    LoanBilling:
+      type: object
+      properties:
+        BillingMethod:
+          type: string
+        BillingMethodEnumDesc:
+          type: string
+        LOCPaymentMethod:
+          type: string
+        LOCPaymentMethodEnumDesc:
+          type: string
+        CouponCode:
+          type: string
+        CouponCodeEnumDesc:
+          type: string
+        LastCouponDt:
+          type: string
+          format: datetime
+          nullable: true
+        HandlingCode:
+          type: string
+        HandlingCodeEnumDesc:
+          type: string
+        FromAcctKeys:
+          $ref: '#/components/schemas/FromAcctKeys'
+        TrnCode:
+          type: string
+        ACHPayerId:
+          type: string
+        Desc:
+          type: string
+        ACHNoticeInd:
+          type: boolean
+          nullable: true
+        BillLastPmtCode:
+          type: string
+        BillLastPmtCodeEnumDesc:
+          type: string
+        AddtlPrincipalAmt:
+          $ref: '#/components/schemas/CurAmt'
+        AutoPmtRetryOption:
+          type: string
+        AutoPmtRetryOptionEnumDesc:
+          type: string
+        DaysDraftDelay:
+          type: integer
+          format: int64
+        BalloonPmtInd:
+          type: boolean
+          nullable: true
+        BillAfterMaturityInd:
+          type: boolean
+          nullable: true
+        AfterMaturityBillNum:
+          type: integer
+          format: int64
+    PmtSched:
+      type: object
+      properties:
+        PmtSchedIdent:
+          type: string
+        RecurModel:
+          $ref: '#/components/schemas/RecurModel'
+        ExtensionNbr:
+          type: integer
+          format: int64
+        NextPmtDt:
+          type: string
+          format: datetime
+          nullable: true
+        InitialCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        FinalCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        NumberOfTimes:
+          type: integer
+          format: int64
+        PmtBalOption:
+          type: string
+        PmtAmtOption:
+          type: string
+        PmtAmtOptionEnumDesc:
+          type: string
+        SuppressNoticeInd:
+          type: boolean
+          nullable: true
+        CurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        BalPercent:
+          type: number
+        EscrowAmt:
+          $ref: '#/components/schemas/CurAmt'
+        OtherEscrowAmt:
+          $ref: '#/components/schemas/CurAmt'
+    DelinquentRateData:
+      type: object
+      properties:
+        DelinquentRateType:
+          type: string
+        DelinquentRateTypeEnumDesc:
+          type: string
+        DelinquentIntRate:
+          type: number
+        DelinquentDays:
+          type: integer
+          format: int64
+    LateFee:
+      type: object
+      properties:
+        FeeIdent:
+          type: string
+        FeeCalcOption:
+          type: string
+        FeeCalcOptionEnumDesc:
+          type: string
+        LateFeePmtCalcOption:
+          type: string
+        FeeBillingOption:
+          type: string
+        CurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        BalPercent:
+          type: number
+        GraceDays:
+          type: integer
+          format: int64
+        LateFeePmtPeriod:
+          type: string
+        PreventLateFeeInd:
+          type: boolean
+          nullable: true
+        RatioToFullPayment:
+          type: number
+        MinThresholdCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        MinCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        MaxCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        WaiveFeeInd:
+          type: boolean
+          nullable: true
+        TotalMaxCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        UCCCInd:
+          type: boolean
+          nullable: true
+        PostMaturityLateFeeInd:
+          type: boolean
+          nullable: true
+        MaturityLateFeeInd:
+          type: boolean
+          nullable: true
+        MaturityMaxCurAmt:
+          $ref: '#/components/schemas/CurAmt'
+        RefData:
+          $ref: '#/components/schemas/RefData'
+    BilledPmt:
+      type: object
+      properties:
+        PmtCompositeAmt:
+          type: array
+          items:
+            $ref: '#/components/schemas/PmtCompositeAmt'
+        DueDt:
+          type: string
+          format: datetime
+          nullable: true
+        BilledDt:
+          type: string
+          format: datetime
+          nullable: true
+        PaidInd:
+          type: boolean
+          nullable: true
+    ReviewPlanData:
+      type: object
+      properties:
+        ReviewPlanIdent:
+          type: string
+        ReviewPlanStartDt:
+          type: string
+          format: datetime
+          nullable: true
+        ReviewPlanExpDt:
+          type: string
+          format: datetime
+          nullable: true
+        ActiveCondition:
+          type: string
+    PmtTermReview:
+      type: object
+      properties:
+        ReviewPlanIdent:
+          type: string
+        PmtTermReviewOption:
+          type: string
+        PmtTermReviewOptionEnumDesc:
+          type: string
+        ReamortizationCalcBal:
+          type: string
+        ReamortizationCalcBalEnumDesc:
+          type: string
+        ExpectedPayoffDt:
+          type: string
+          format: datetime
+          nullable: true
+        MinPmtChange:
+          type: number
+        MaxPmtChange:
+          type: number
+        MaxPmtDecreaseLife:
+          type: number
+        MaxPmtIncreaseLife:
+          type: number
+        MaxTermChange:
+          type: integer
+          format: int64
+        MaxTermDecrease:
+          type: integer
+          format: int64
+        MaxTermIncrease:
+          type: integer
+          format: int64
+        PmtTermRecurType:
+          type: string
+        RecurInterval:
+          type: integer
+          format: int64
+        DayOfMonth:
+          type: string
+        Month:
+          type: integer
+          format: int64
+        LeadDays:
+          type: integer
+          format: int64
+        PmtRecalcMethod:
+          type: string
+        PmtRecalcMethodEnumDesc:
+          type: string
+        PmtRecalcTerm:
+          $ref: '#/components/schemas/Term'
+        NextPmtTermReviewDt:
+          type: string
+          format: datetime
+          nullable: true
+        NextPmtInsuranceTermReviewDt:
+          type: string
+          format: datetime
+          nullable: true
+        PendingPmtAmt:
+          $ref: '#/components/schemas/CurAmt'
+        PendingPmtAndInsAmt:
+          $ref: '#/components/schemas/CurAmt'
+        TermReviewExpDt:
+          type: string
+          format: datetime
+          nullable: true
+        PmtReviewExpDt:
+          type: string
+          format: datetime
+          nullable: true
+    EscrowPmtSched:
+      type: object
+      properties:
+        RecurRule:
+          $ref: '#/components/schemas/RecurRule'
+        NextPmtDt:
+          type: string
+          format: datetime
+          nullable: true
+        EscrowAmt:
+          $ref: '#/components/schemas/CurAmt'
+        OtherEscrowAmt:
+          $ref: '#/components/schemas/CurAmt'
+    EscrowCtrlData:
+      type: object
+      properties:
+        EscrowCtrlIdent:
+          type: string
+        OverdraftCode:
+          type: string
+        OverdraftCodeEnumDesc:
+          type: string
+        OverdraftLimitAmt:
+          $ref: '#/components/schemas/CurAmt'
+        EscrowAnalysisType:
+          type: string
+        EscrowAnalysisTypeEnumDesc:
+          type: string
+        EscrowAnalysisBalOption:
+          type: string
+        EscrowAnalysisBalOptionEnumDesc:
+          type: string
+        RecurRule:
+          $ref: '#/components/schemas/RecurRule'
+        NextAnalysisDt:
+          type: string
+          format: datetime
+          nullable: true
+        EscrowDeficiencyOption:
+          type: string
+        EscrowDeficiencyOptionEnumDesc:
+          type: string
+        DeficiencySpreadPeriods:
+          type: integer
+          format: int64
+        EscrowMinDeficiencyAmt:
+          $ref: '#/components/schemas/CurAmt'
+        EscrowShortageOption:
+          type: string
+        EscrowShortageOptionEnumDesc:
+          type: string
+        EscrowMinShortageAmt:
+          $ref: '#/components/schemas/CurAmt'
+        EscrowSurplusOption:
+          type: string
+        EscrowSurplusOptionEnumDesc:
+          type: string
+        EscrowMinSurplusAmt:
+          $ref: '#/components/schemas/CurAmt'
+        RegulationXInd:
+          type: boolean
+          nullable: true
+        EscrowPmtSched:
+          $ref: '#/components/schemas/EscrowPmtSched'
+        RoundingOption:
+          type: string
+        RoundingOptionEnumDesc:
+          type: string
+        NewPmtPeriods:
+          type: integer
+          format: int64
+        EscrowDtlStatus:
+          type: string
+        OpenDt:
+          type: string
+          format: datetime
+          nullable: true
+        ClosedDt:
+          type: string
+          format: datetime
+          nullable: true
+        NoticeData:
+          type: array
+          items:
+            $ref: '#/components/schemas/NoticeData'
+    IntBearingEscrow:
+      type: object
+      properties:
+        Rate:
+          type: number
+        Index:
+          type: integer
+          format: int64
+        AccrualMethod:
+          type: string
+        AccrualMethodEnumDesc:
+          type: string
+        DailyAccrual:
+          type: string
+        DailyAccrualEnumDesc:
+          type: string
+        IntDisposition:
+          type: string
+        IntDispositionEnumDesc:
+          type: string
+        IntPayoffOption:
+          type: string
+        IntPayoffOptionEnumDesc:
+          type: string
+        AccrualFrequency:
+          $ref: '#/components/schemas/RecurRule'
+        NextIntPmtDt:
+          type: string
+          format: datetime
+          nullable: true
+    Dealer:
+      type: object
+      properties:
+        DealerIdent:
+          type: string
+        IndirectLendingInd:
+          type: boolean
+          nullable: true
+        DealerName:
+          type: string
+        DealerReserveType:
+          type: string
+        DealerReserveTypeEnumDesc:
+          type: string
+        BankEarningRate:
+          type: number
+        DealerReserveRate:
+          type: number
+        Margin:
+          type: number
+        DealerRateCalcOption:
+          type: string
+        DealerReserveMethod:
+          type: string
+        DealerReserveAmt:
+          $ref: '#/components/schemas/CurAmt'
+        DealerFixedFeeAmt:
+          $ref: '#/components/schemas/CurAmt'
+        DealerReserveCalcMethod:
+          type: string
+        ScheduledIntAmt:
+          $ref: '#/components/schemas/CurAmt'
+        DealerRateIdent:
+          type: string
+        TimeFrame:
+          $ref: '#/components/schemas/TimeFrame'
+        DealerReportStatus:
+          type: string
+        Condition:
+          type: string
+        DealerMaxAmt:
+          $ref: '#/components/schemas/CurAmt'
+        PayoffOption:
+          type: string
+        DealerEarningMethod:
+          type: string
+        DealerRecourseType:
+          type: string
+        DealerRecourseFullAmtPeriod:
+          type: integer
+          format: int64
+        DealerRecourseCurrentAmtPeriod:
+          type: integer
+          format: int64
+        RecourseDays:
+          type: integer
+          format: int64
+        RecoursePct:
+          type: number
+    LOCAdvance:
+      type: object
+      properties:
+        AdvanceCode:
+          type: string
+        AdvanceCodeEnumDesc:
+          type: string
+        OrigLimitAmt:
+          $ref: '#/components/schemas/CurAmt'
+        LimitAmt:
+          $ref: '#/components/schemas/CurAmt'
+        MinAdvanceOption:
+          type: string
+        MinAdvanceOptionEnumDesc:
+          type: string
+        MinAdvanceAmt:
+          $ref: '#/components/schemas/CurAmt'
+        FreeAdvanceNum:
+          type: integer
+          format: int64
+        WaiveAdvanceFeeInd:
+          type: boolean
+    LOCSchedule:
+      type: object
+      properties:
+        SchedNum:
+          type: integer
+          format: int64
+        StartDt:
+          type: string
+          format: datetime
+          nullable: true
+        AdvanceCode:
+          type: string
+        AdvanceCodeEnumDesc:
+          type: string
+        LimitAmt:
+          $ref: '#/components/schemas/CurAmt'
+        BalloonPmtAmt:
+          type: number
+        LoanNoteType:
+          type: string
+        LoanNoteTypeEnumDesc:
+          type: string
+    FDICAmount:
+      required:
+      - FDICAmountType
+      type: object
+      properties:
+        FDICAmountType:
+          type: string
+        Amount:
+          type: number
+    PastDueProfileData:
+      type: object
+      properties:
+        PastDueType:
+          type: string
+        TimesPastDueNum:
+          type: integer
+          format: int64
+    CRAData:
+      type: object
+      properties:
+        CRAReportingInd:
+          type: boolean
+          nullable: true
+        CRAReportingCategory:
+          type: string
+        CRAReportingCategoryEnumDesc:
+          type: string
+        CRALoanType:
+          type: string
+        CRALoanTypeEnumDesc:
+          type: string
+        CRARevenueCode:
+          type: string
+        CRARevenueCodeEnumDesc:
+          type: string
+        CRAAffiliate:
+          type: string
+        CRANewFunds:
+          type: number
+    MortgageReportingData:
+      type: object
+      properties:
+        ReportingType:
+          type: string
+        ReportingCode:
+          type: string
+        ReportingCodeEnumDesc:
+          type: string
+    HAMPData:
+      type: object
+      properties:
+        EffDt:
+          type: string
+          format: datetime
+          nullable: true
+        HAMPOption:
+          type: string
+        HAMPServicer:
+          type: string
+        ForbearanceAmt:
+          $ref: '#/components/schemas/CurAmt'
+    ExpectedCreditLossData:
+      type: object
+      properties:
+        CurDebtCoverageRatio:
+          type: number
+        OrigDebtCoverageRatio:
+          type: number
+        CurCreditScore:
+          type: string
+        OrigCreditScore:
+          type: string
+        OrigFairMarketValue:
+          $ref: '#/components/schemas/CurAmt'
+    HomeMortgageDisclosure:
+      type: object
+      properties:
+        IsRESPAInd:
+          type: boolean
+          nullable: true
+        InvestorConformInd:
+          type: boolean
+          nullable: true
+        ApplicationDt:
+          type: string
+          format: datetime
+        MortgageType:
+          type: string
+        MortgageTypeEnumDesc:
+          type: string
+        PropertyType:
+          type: string
+        PropertyTypeEnumDesc:
+          type: string
+        PurposeCode:
+          type: string
+        PurposeCodeEnumDesc:
+          type: string
+        ImprovementCode:
+          type: string
+        ImprovementCodeEnumDesc:
+          type: string
+        OccupantCode:
+          type: string
+        OccupantCodeEnumDesc:
+          type: string
+        LoanAmt:
+          $ref: '#/components/schemas/CurAmt'
+        PreapprovalCode:
+          type: string
+        PreapprovalCodeEnumDesc:
+          type: string
+        MortgagePointsPmtCode:
+          type: string
+        MortgagePointsPmtCodeEnumDesc:
+          type: string
+        IsPointsReportedInd:
+          type: boolean
+          nullable: true
+        TotalPointsPaidAmt:
+          $ref: '#/components/schemas/CurAmt'
+        MortgagePointsYTDAmt:
+          $ref: '#/components/schemas/CurAmt'
+        RealEstateCode:
+          type: string
+        RealEstateCodeEnumDesc:
+          type: string
+        InsurancePaidAmt:
+          type: number
+        PostAddr:
+          $ref: '#/components/schemas/PostAddr'
+        FIPSStateCode:
+          type: string
+        FIPSStateCodeEnumDesc:
+          type: string
+        IncomeAmt:
+          $ref: '#/components/schemas/CurAmt'
+        RateSpread:
+          type: string
+        HOEPAStatus:
+          type: string
+        HOEPAStatusEnumDesc:
+          type: string
+        LienStatus:
+          type: string
+        LienStatusEnumDesc:
+          type: string
+        FHLBPledgeType:
+          type: string
+        HAMPData:
+          $ref: '#/components/schemas/HAMPData'
+        FHACaseNumber:
+          type: string
+        FHASectionOfAct:
+          type: string
+        FHAADPCode:
+          type: string
+        FHASuffix:
+          type: string
+        MortgageReportingData:
+          type: array
+          items:
+            $ref: '#/components/schemas/MortgageReportingData'
+        FHAAcknowledgedDt:
+          type: string
+          format: datetime
+          nullable: true
+        CRAData:
+          $ref: '#/components/schemas/CRAData'
+    BankruptcyData:
+      type: object
+      properties:
+        PrePetitionCurrentBalAmt:
+          $ref: '#/components/schemas/CurAmt'
+        PrePetitionPaidPriorMonthAmt:
+          $ref: '#/components/schemas/CurAmt'
+        TotalPaidBankruptcyAmt:
+          $ref: '#/components/schemas/CurAmt'
+        PastDueDays:
+          type: integer
+          format: int64
+    ReinstatementAndAccelData:
+      type: object
+      properties:
+        AccelerationAmt:
+          $ref: '#/components/schemas/CurAmt'
+        ReinstatementAmt:
+          $ref: '#/components/schemas/CurAmt'
+        ReinstatementDt:
+          type: string
+          format: datetime
+          nullable: true
+    SBAData:
+      type: object
+      properties:
+        ApprovalDt:
+          type: string
+          format: datetime
+          nullable: true
+        District:
+          type: string
+        SBAStatus:
+          type: string
+        SoldStatus:
+          type: string
+        GPNumber:
+          type: integer
+          format: int64
+        FeePct:
+          type: number
+        BasisPointFeeAmt:
+          type: number
+        GuaranteePct:
+          type: number
+        RemittancePenaltyAmt:
+          $ref: '#/components/schemas/CurAmt'
+    StudentLoanData:
+      type: object
+      properties:
+        StudentTypeCode:
+          type: string
+        StudentTypeCodeEnumDesc:
+          type: string
+        StudentLoanStatus:
+          type: string
+        StudentLoanStatusEnumDesc:
+          type: string
+        StudentActionCode:
+          type: string
+        StudentActionCodeEnumDesc:
+          type: string
+        StudentActionDt:
+          type: string
+          format: datetime
+          nullable: true
+        OvrdRate:
+          type: number
+    ForbearanceConditions:
+      type: object
+      properties:
+        EffDt:
+          type: string
+          format: datetime
+          nullable: true
+        ConditionType:
+          type: string
+    CreditBureauPartyData:
+      type: object
+      properties:
+        PartyKeys:
+          $ref: '#/components/schemas/PartyKeys'
+        CreditBureauInd:
+          type: boolean
+          nullable: true
+        BureauTransactionType:
+          type: string
+        BureauTransactionTypeEnumDesc:
+          type: string
+        ECOACode:
+          type: string
+        ECOACodeEnumDesc:
+          type: string
+        ConsumerCode:
+          type: string
+        CountryCode:
+          $ref: '#/components/schemas/CountryCode'
+        SameAddrCode:
+          type: string
+        SameAddrCodeEnumDesc:
+          type: string
+        BureauAddrIdent:
+          type: string
+        CommentDesc:
+          type: string
+        UpDt:
+          type: string
+          format: datetime
+          nullable: true
+        NotificationDt:
+          type: string
+          format: datetime
+          nullable: true
+        BankruptcyInd:
+          type: boolean
+    CreditBureauAcctData:
+      type: object
+      properties:
+        BureauPortfolioType:
+          type: string
+        BureauPortfolioTypeEnumDesc:
+          type: string
+        BureauAcctTypeEnumDesc:
+          type: string
+        BureauStatus:
+          type: string
+        BureauStatusEnumDesc:
+          type: string
+        BureauAcctType:
+          type: string
+        Freq:
+          type: string
+        BalloonPmtAmt:
+          type: number
+        FirstDelinquencyDt:
+          type: string
+          format: datetime
+          nullable: true
+        PmtRating:
+          type: string
+        OrigChargeOffAmt:
+          type: number
+        CreditBureauPartyData:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditBureauPartyData'
+    LoanAcctInfo:
+      type: object
+      properties:
+        CheckCreditData:
+          $ref: '#/components/schemas/CheckCreditData'
+        LoanReviewData:
+          $ref: '#/components/schemas/LoanReviewData'
+        PriorRefinancedAcctId:
+          type: string
+        DirectIndirectCode:
+          type: string
+        HasCreditLineInd:
+          type: boolean
+          nullable: true
+        TimesExtendedNum:
+          type: integer
+          format: int64
+        CreditBackIdent:
+          type: string
+        CommitmentIdent:
+          type: string
+        CashProceedsAmt:
+          $ref: '#/components/schemas/CurAmt'
+        AddOnInterestAmt:
+          $ref: '#/components/schemas/CurAmt'
+        ExpensesFinancedAmt:
+          $ref: '#/components/schemas/CurAmt'
+        FeesFinancedAmt:
+          $ref: '#/components/schemas/CurAmt'
+        FeesPrepaidAmt:
+          $ref: '#/components/schemas/CurAmt'
+        DeferredFeesAmt:
+          $ref: '#/components/schemas/CurAmt'
+        OriginationFee:
+          type: array
+          items:
+            $ref: '#/components/schemas/OriginationFee'
+        DeferredFee:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeferredFee'
+        PmtReserveOption:
+          type: string
+        PmtReserveOptionEnumDesc:
+          type: string
+        PmtReserveAmt:
+          $ref: '#/components/schemas/CurAmt'
+        PmtReserveProcOption:
+          type: string
+        PmtReserveProcOptionEnumDesc:
+          type: string
+        SoldLoanInd:
+          type: boolean
+          nullable: true
+        PurchasedLoanCode:
+          type: string
+        PurchasedLoanCodeEnumDesc:
+          type: string
+        SoldAmt:
+          $ref: '#/components/schemas/CurAmt'
+        SoldPercent:
+          type: number
+        OriginationDt:
+          type: string
+          format: datetime
+          nullable: true
+        ApprovalCode:
+          type: string
+        ApprovalCodeEnumDesc:
+          type: string
+        LastRenewalDt:
+          type: string
+          format: datetime
+          nullable: true
+        Freq:
+          type: string
+        FreqEnumDesc:
+          type: string
+        ReportPurposeCode:
+          type: string
+        PurposeDesc:
+          type: string
+        QualityRating:
+          type: string
+        RiskCategoryType:
+          type: string
+        LoanSource:
+          type: string
+        CallDt:
+          type: string
+          format: datetime
+          nullable: true
+        LoanReportingCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoanReportingCodes'
+        SecuredLoanInd:
+          type: boolean
+          nullable: true
+        IsLoanRealEstateSecuredInd:
+          type: boolean
+          nullable: true
+        CollateralCode:
+          type: string
+        CollateralCodeEnumDesc:
+          type: string
+        CollateralDesc:
+          type: string
+        CollateralBalCode:
+          type: string
+        CollateralBalCodeEnumDesc:
+          type: string
+        LTVPct:
+          type: number
+        LoanNoteType:
+          type: string
+        LoanNoteTypeEnumDesc:
+          type: string
+        CapitalizationOption:
+          type: string
+        CapitalizationOptionEnumDesc:
+          type: string
+        NegativeAmortData:
+          $ref: '#/components/schemas/NegativeAmortData'
+        RevolvingLoanInd:
+          type: boolean
+          nullable: true
+        RevolvingLoanCode:
+          type: string
+        Insurance:
+          type: array
+          items:
+            $ref: '#/components/schemas/Insurance'
+        IncCreditLineLifeCalcInd:
+          type: boolean
+          nullable: true
+        InsuranceBillingFrequency:
+          $ref: '#/components/schemas/RecurRule'
+        SinglePremiumInsurance:
+          type: array
+          items:
+            $ref: '#/components/schemas/SinglePremiumInsurance'
+        MinFinanceCharge:
+          type: number
+        BalloonTerm:
+          $ref: '#/components/schemas/BalloonTerm'
+        BalloonAmortMaturityDt:
+          type: string
+          format: datetime
+          nullable: true
+        CreditLineCode:
+          type: string
+        CreditLineCodeEnumDesc:
+          type: string
+        CreditLineCycle:
+          type: integer
+          format: int64
+        NextAnniversaryFeeDt:
+          type: string
+          format: datetime
+          nullable: true
+        InterestBilling:
+          $ref: '#/components/schemas/InterestBilling'
+        LoanBilling:
+          $ref: '#/components/schemas/LoanBilling'
+        TotalPmtCount:
+          type: integer
+          format: int64
+        RegPmt:
+          $ref: '#/components/schemas/RegPmt'
+        RemainingPmtCount:
+          type: integer
+          format: int64
+        IncInsurancePmtCalcInd:
+          type: boolean
+          nullable: true
+        CurrentPmtSchedIdent:
+          type: string
+        PmtSchedNextDueDt:
+          type: string
+          format: datetime
+          nullable: true
+        PmtSchedTimesUsed:
+          type: integer
+          format: int64
+        PmtSched:
+          type: array
+          items:
+            $ref: '#/components/schemas/PmtSched'
+        EscrowPmtReqInd:
+          type: boolean
+          nullable: true
+        EscrowOverpayOption:
+          type: string
+        EscrowOverpayOptionEnumDesc:
+          type: string
+        OverpayOption:
+          type: string
+        OverpayOptionEnumDesc:
+          type: string
+        PrincipalCurtailmentOption:
+          type: string
+        PrincipalCurtailmentOptionEnumDesc:
+          type: string
+        DelinquentRateData:
+          $ref: '#/components/schemas/DelinquentRateData'
+        LateFee:
+          $ref: '#/components/schemas/LateFee'
+        ScheduleNoteInd:
+          type: boolean
+          nullable: true
+        AccrualBalAmortCode:
+          type: string
+        AccrualBalAmortCodeEnumDesc:
+          type: string
+        DuePmt:
+          $ref: '#/components/schemas/DuePmt'
+        BilledPmt:
+          type: array
+          items:
+            $ref: '#/components/schemas/BilledPmt'
+        NextPmt:
+          $ref: '#/components/schemas/NextPmt'
+        LastPmt:
+          $ref: '#/components/schemas/LastPmt'
+        ReviewPlanData:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReviewPlanData'
+        PmtTermReview:
+          type: array
+          items:
+            $ref: '#/components/schemas/PmtTermReview'
+        PrepayPenalty:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrepayPenalty'
+        ChargeOffInd:
+          type: boolean
+          nullable: true
+        ChargeOffCode:
+          type: string
+        ChargeOffCodeEnumDesc:
+          type: string
+        NonAccrualInd:
+          type: boolean
+          nullable: true
+        NonAccrualCode:
+          type: string
+        NonAccrualCodeEnumDesc:
+          type: string
+        WriteDownCode:
+          type: string
+        WriteDownCodeEnumDesc:
+          type: string
+        PmtPostingRestrictions:
+          $ref: '#/components/schemas/PmtPostingRestrictions'
+        AdvPostingRestrictions:
+          $ref: '#/components/schemas/AdvPostingRestrictions'
+        EscrowCtrlData:
+          $ref: '#/components/schemas/EscrowCtrlData'
+        IntBearingEscrow:
+          $ref: '#/components/schemas/IntBearingEscrow'
+        Dealer:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dealer'
+        LOCAdvance:
+          $ref: '#/components/schemas/LOCAdvance'
+        LOCSchedule:
+          type: array
+          items:
+            $ref: '#/components/schemas/LOCSchedule'
+        RelatedBalanceInd:
+          type: boolean
+          nullable: true
+        FDICLossShareInd:
+          type: boolean
+          nullable: true
+        FDICClassificationEntity:
+          type: string
+        FDICClassificationDt:
+          type: string
+          format: datetime
+          nullable: true
+        FDICCode:
+          type: string
+        FDICAmount:
+          type: array
+          items:
+            $ref: '#/components/schemas/FDICAmount'
+        FRBCode:
+          type: string
+        IncYearEndReportCode:
+          type: string
+        IncYearEndReportCodeEnumDesc:
+          type: string
+        PmtHistProfileCode:
+          type: string
+        PmtHistProfileCodeEnumDesc:
+          type: string
+        ImminentDefaultInd:
+          type: boolean
+          nullable: true
+        PastDueDays:
+          type: integer
+          format: int64
+        PastDueProfileData:
+          type: array
+          items:
+            $ref: '#/components/schemas/PastDueProfileData'
+        LastInstallmentDt:
+          type: string
+          format: datetime
+          nullable: true
+        RecourseCode:
+          type: string
+        RecourseCodeEnumCode:
+          type: string
+        HomeMortgageDisclosure:
+          $ref: '#/components/schemas/HomeMortgageDisclosure'
+        CreditBureauAcctData:
+          $ref: '#/components/schemas/CreditBureauAcctData'
+        LoanConversionDt:
+          type: string
+          format: datetime
+          nullable: true
+        StudentLoanData:
+          $ref: '#/components/schemas/StudentLoanData'
+        RestructuredLoanInd:
+          type: boolean
+          nullable: true
+        ForbearanceConditions:
+          $ref: '#/components/schemas/ForbearanceConditions'
+        SBAData:
+          $ref: '#/components/schemas/SBAData'
+        ReinstatementAndAccelData:
+          $ref: '#/components/schemas/ReinstatementAndAccelData'
+        BankruptcyData:
+          $ref: '#/components/schemas/BankruptcyData'
+        ExpectedCreditLossData:
+          $ref: '#/components/schemas/ExpectedCreditLossData'
+      allOf:
+      - $ref: '#/components/schemas/AcctInfo'
+    PrepayPenalty:
+      type: object
+      properties:
+        PrepayPenaltyIdent:
+          type: string
+        EffDt:
+          type: string
+        PrepayPenaltyCode:
+          type: string
+        PrepayPenaltyCodeEnumDesc:
+          type: string
+        PrepayPenaltyTable:
+          type: string
+        IncrementAmt:
+          type: number
+        WaiveFeeInd:
+          type: boolean
+        MaxPrepayPenaltyAmt:
+          $ref: '#/components/schemas/CurAmt'
+        MinPrepayPenaltyAmt:
+          $ref: '#/components/schemas/CurAmt'
+      allOf:
+      - $ref: '#/components/schemas/CurAmt'
+    AcctInfo:
+      type: object
+      properties:
+        Brand:
+          type: string
+        GoodThruDt:
+          type: string
+          format: datetime
+          nullable: true
+        AcctDtlStatus:
+          type: string
+        AcctDtlStatusEnumDesc:
+          type: string
+        AcctDtlStatusDt:
+          type: string
+          format: datetime
+          nullable: true
+        CurCode:
+          $ref: '#/components/schemas/CurCode'
+        AcctPref:
+          $ref: '#/components/schemas/AcctPref'
+        AcctApplIdent:
+          maxLength: 80
+          type: string
+        CampaignIdent:
+          type: string
+        Ownership:
+          type: string
+        OwnershipEnumDesc:
+          type: string
+        AcctIdent:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcctIdent'
+        ProductIdent:
+          type: string
+        Desc:
+          type: string
+        AlternateProductDesc:
+          type: string
+        AcctType:
+          type: string
+        AcctSubType:
+          type: string
+        AcctSubTypeEnumDesc:
+          type: string
+        TaxIncentiveType:
+          type: string
+        TaxIncentiveTypeEnumDesc:
+          type: string
+        PromoCode:
+          type: string
+        PromoCodeEnumDesc:
+          type: string
+        AcctUse:
+          type: string
+        AcctUseEnumDesc:
+          type: string
+        InitialAmount:
+          $ref: '#/components/schemas/InitialAmount'
+        OpenDt:
+          type: string
+          format: datetime
+          nullable: true
+        IntAccrualStartDt:
+          type: string
+          format: datetime
+          nullable: true
+        ClosedDt:
+          type: string
+          format: datetime
+          nullable: true
+        ClosedReasonCode:
+          type: string
+        ClosedReasonEnumDesc:
+          type: string
+        BalanceAtClosingAmt:
+          $ref: '#/components/schemas/BalanceAtClosingAmt'
+        Term:
+          $ref: '#/components/schemas/Term'
+        TermToMaturity:
+          $ref: '#/components/schemas/Term'
+        MaturityDt:
+          type: string
+          format: datetime
+          nullable: true
+        FeeCollectedAmt:
+          $ref: '#/components/schemas/FeeCollectedAmt'
+        LastContactDt:
+          type: string
+          format: datetime
+          nullable: true
+        DateData:
+          type: array
+          items:
+            $ref: '#/components/schemas/DateData'
+          default: []
+        RelationshipMgr:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipMgr'
+        OriginatingBranch:
+          type: string
+        OriginatingBranchEnumDesc:
+          type: string
+        PreferredBranch:
+          type: string
+        PreferredBranchEnumDesc:
+          type: string
+        ResponsibleBranch:
+          type: string
+        ResponsibleBranchEnumDesc:
+          type: string
+        NicknameOption:
+          type: string
+        NicknameOptionEnumDesc:
+          type: string
+        Nickname:
+          type: string
+        AcctTitleOption:
+          type: string
+        AcctTitle:
+          type: string
+        AddtlTitles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddtlTitles'
+        HandlingCodeOption:
+          type: string
+        HandlingCodeOptionEnumDesc:
+          type: string
+        HandlingCode:
+          type: string
+        HandlingCodeEnumDesc:
+          type: string
+        OEDCode:
+          type: string
+        OEDCodeEnumDesc:
+          type: string
+        EmployeeInd:
+          type: boolean
+          nullable: true
+        AccountingMethod:
+          type: string
+        AccountingMethodEnumDesc:
+          type: string
+        AccountingValue:
+          type: string
+        ClassCode:
+          type: string
+        ClassCodeEnumDesc:
+          type: string
+        AcctTypeCode:
+          type: string
+        AcctTypeCodeEnumDesc:
+          type: string
+        AcctOpenMethod:
+          type: string
+        AcctOpenMethodEnumDesc:
+          type: string
+        ClientDefinedData:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientDefinedData'
+        AcctStmtData:
+          $ref: '#/components/schemas/AcctStmtData'
+        NoticeHandlingCode:
+          type: string
+        NoticeData:
+          type: array
+          items:
+            $ref: '#/components/schemas/NoticeData'
+        ProdIntRateId:
+          type: string
+        ProdIntRateIdEnumDesc:
+          type: string
+        Rate:
+          type: number
+        EffectiveRate:
+          type: number
+        IntRateData:
+          $ref: '#/components/schemas/IntRateData'
+        MaturityIntCalcData:
+          $ref: '#/components/schemas/MaturityIntCalcData'
+        PromotionalRate:
+          $ref: '#/components/schemas/PromotionalRate'
+        RateChangeData:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateChangeData'
+        AcctBal:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcctBal'
+        AcctPeriodData:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcctPeriodData'
+        TranCounter:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranCounter'
+        AlternateAddrInd:
+          type: boolean
+          nullable: true
+        FullName:
+          type: string
+        PostAddr:
+          type: array
+          items:
+            $ref: '#/components/schemas/PostAddr'
+        AcctPhoneNum:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneNum'
+        TaxWithheldData:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxWithheldData'
+        TaxIdentType:
+          type: string
+        TaxIdentTypeEnumDesc:
+          type: string
+        TaxIdent:
+          type: string
+        TaxIdentApplyDt:
+          type: string
+          format: datetime
+          nullable: true
+        TaxExempt:
+          type: string
+        TaxExemptEnumDesc:
+          type: string
+        USATaxIdCert:
+          $ref: '#/components/schemas/USATaxIdCert'
+        WithholdingOption:
+          type: string
+        WithholdingOptionEnumDesc:
+          type: string
+        WithholdingData:
+          type: array
+          items:
+            $ref: '#/components/schemas/WithholdingData'
+        IntReportingInd:
+          type: boolean
+          nullable: true
+        IntReportingCode:
+          type: string
+          nullable: true
+        IntReportingCodeEnumDesc:
+          type: string
+        IntReporting1099Data:
+          $ref: '#/components/schemas/IntReporting1099Data'
+        Fee:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fee'
+        CreditRisk:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditRisk'
+        RiskRanking:
+          type: string
+        RiskRankingEnumDesc:
+          type: string
+        TrnRestriction:
+          type: string
+        TrnRestrictionEnumDesc:
+          type: string
+        TrnRestrictionOvrd:
+          type: string
+        TrnRestrictionOvrdEnumDesc:
+          type: string
+        NoDebitPostInd:
+          type: boolean
+          nullable: true
+        NoCreditPostInd:
+          type: boolean
+          nullable: true
+        MemoPostProcessOptOvrd:
+          type: string
+        MemoPostProcessOptOvrdEnumDesc:
+          type: string
+        ElectronicBankingOpt:
+          type: string
+        ElectronicBankingOptEnumDesc:
+          type: string
+        ReportGroupCode:
+          type: string
+        ReportGroupCodeEnumDesc:
+          type: string
+        DocDistributionOption:
+          type: string
+        DocDistributionOptionEnumDesc:
+          type: string
+        NAICS:
+          type: string
+        NAICSEnumDesc:
+          type: string
+        SIC:
+          type: string
+        SICEnumDesc:
+          type: string
+        SICSubCode:
+          type: string
+        SICSubCodeEnumDesc:
+          type: string
+        CostCenter:
+          type: string
+        CostCenterEnumDesc:
+          type: string
+        RetentionOption:
+          type: string
+        RetentionOptionEnumDesc:
+          type: string
+        TranHistoryOption:
+          type: string
+        TranHistoryOptionEnumDesc:
+          type: string
+        RelationshipPricingInd:
+          type: boolean
+          nullable: true
+        RelationshipPricingAcctData:
+          $ref: '#/components/schemas/RelationshipPricingAcctData'
+        SweepBalRelationshipInd:
+          type: boolean
+          nullable: true
+        CashMgmtRelData:
+          $ref: '#/components/schemas/CashMgmtRelData'
+        RestrictedInd:
+          type: boolean
+          nullable: true
+        RestrictedDesc:
+          type: string
+        Reminder:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reminder'
+        AcctMemoData:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcctMemoData'
+        UpdateContactCode:
+          type: string
+        NOWEnabledInd:
+          type: boolean
+          nullable: true
+        RenewalData:
+          $ref: '#/components/schemas/RenewalData'
+        AcctMajorType:
+          type: string
+        AcctMajorTypeEnumDesc:
+          type: string
+        AgreementData:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgreementData'
+        IsPassbookInd:
+          type: boolean
+          nullable: true
+        IsValidInd:
+          type: boolean
+          nullable: true
+        IsCheckInd:
+          type: boolean
+          nullable: true
+        CallReportCode:
+          type: string
+        AccessLevelData:
+          $ref: '#/components/schemas/AccessLevelData'
+        RewardsData:
+          type: array
+          items:
+            $ref: '#/components/schemas/RewardsData'
+      description: see [AcctInfo](https://bms.ifxforum.org/rel2_4/content/DisplayTag.jsp?id=4619)
+        for indepth description
+    AcctInqRs_links:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+    AcctInqRs_values:
+      type: object
+      properties:
+        url:
+          type: string
+        record:
+          $ref: '#/components/schemas/AcctRec'
+    AcctKeys_name:
+      type: object
+      properties:
+        localpart:
+          type: string
+        namespaceURI:
+          type: string
+        prefix:
+          type: string
+    AcctKeys_cardKeysOrAcctIdentAndCurCode:
+      type: object
+      properties:
+        globalScope:
+          type: boolean
+        name:
+          $ref: '#/components/schemas/AcctKeys_name'
+        nil:
+          type: boolean
+        typeSubstituted:
+          type: boolean
+        value:
+          type: object
+          properties: {}
